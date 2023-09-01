@@ -1,0 +1,24 @@
+﻿@using NAC_Aircraft_Checklist.Models.Entities;
+@{
+}
+<h1>Aircraft</h1>
+
+
+<nac-admin-aircraft card-title="Aircrafts" get-target="Aircraft/Details/" post-target="Aircraft/create/" msg-empty="No Aircrafts Listed" headers="Aircraft,Base,Type,Email">
+    @{
+        if (ViewData["Aircrafts"] != null)
+        {
+            var aircrafts = ViewData["Aircrafts"] as List<Aircraft>;
+            if (aircrafts != null)
+                foreach (var aircraft in aircrafts)
+                {
+                    <nac-admin-aircraft-item slot="aircraft" edit-target="/Aircraft/Edit?id=@aircraft.Id"  card-title="Aircrafts" item-id="@aircraft.Id" reg="@aircraft.Reg" email="@aircraft.EmailAddress" base-ops="@aircraft.BaseOfOperations" type="@aircraft.Type"></nac-admin-aircraft-item>
+                }
+        }
+
+
+    }
+</nac-admin-aircraft>
+
+<ul>
+</ul>

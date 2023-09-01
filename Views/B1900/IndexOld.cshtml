@@ -1,0 +1,665 @@
+﻿@using NAC_Aircraft_Checklist.Models.Entry;
+@using NAC_Aircraft_Checklist.Models.Entry.B1900;
+@using NAC_Aircraft_Checklist.Models.Entry.Revisions;
+@using NAC_Aircraft_Checklist.Models.Entities;
+@using NAC_Aircraft_Checklist.Models.Tables;
+@using NAC_Aircraft_Checklist.Models.Documents;
+@using NAC_Aircraft_Checklist.Util.Table;
+@model B1900Document;
+@{
+
+
+}
+<style>
+
+
+    table {
+        width: 90%;
+        border-collapse: collapse;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    select {
+        word-wrap: normal;
+        text-align: center;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 4px;
+    }
+
+    td {
+        text-align: left;
+        font-size: 9pt;
+    }
+
+    th {
+        text-align: center;
+    }
+
+    td {
+        position: relative;
+    }
+
+    textarea {
+        border: none;
+        resize: none;
+    }
+
+    .colspan-3 {
+        width: 100px;
+    }
+
+    .rowspan-2 {
+        height: 25px;
+    }
+
+    .documentDetails {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .documentDetailsRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .documentDetailsItem {
+        display: flex;
+        flex-direction: row;
+        width: 40%;
+        justify-content: space-between;
+    }
+</style>
+<nac-document-header src="/img/logo.png" document-number="OPS-035f" document-title="Aircraft Checklist - B1900"></nac-document-header>
+
+<!--Document Details-->
+
+<form method="post" action="B1900/Create">
+    @{
+        var revision = ViewData["Revision"] as B1900Revision;
+        var aircrafts = ViewData["Aircrafts"] as List<Aircraft>;
+        <table style="width:100%;">
+            <tbody>
+                <tr>
+                    <td style="border:none;">Aircraft registration</td>
+                    <td style="border:none;">
+                        <select style="width:100%;" class="custom-select mr-sm-2" required asp-for="@Model.B1900Entry.AircraftId">
+                            <option disabled selected>-Select-</option>
+
+                            @if (aircrafts != null)
+                                foreach (var aircraft in aircrafts)
+                                {
+                                    <option value="@aircraft.Id">@aircraft.Reg</option>
+                                }
+                        </select>
+                    </td>
+                    <td style="border:none;text-align:end;">Date</td>
+                    <td style="border:none;text-align:end;">
+                        <input style="width:100%;" asp-for="@Model.B1900Entry.Date" value="@DateTime.Today.ToString("yyyy-MM-dd")" required type="date" />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="border:none;"> Base of Operations</td>
+                    <td style="border:none;">
+                        <input style="width:100%;" required asp-for="@Model.B1900Entry.BaseOfOperations" type="text" />
+                    </td>
+                    <td style="border:none;">Completed By</td>
+                    <td style="border:none;">
+                        <input style="width:100%;" asp-for="@Model.B1900Entry.Revision" value="@Model.B1900Entry.Revision" type="text" type="hidden" />
+                        <input style="width:100%;" required asp-for="@Model.B1900Entry.CompletedBy" type="text" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    <div class="pagebreak"></div>
+    <nac-table-pager revision="@revision.RevisionNumber" date="@revision.Date.ToString("yyyy-MM-dd")">
+        <!--Interior Table-->
+        <table slot="table">
+            <thead>    </thead>
+            <tbody>
+
+                @{
+                    var InteriorQuestion = ViewData["Interior"] as Table<B1900InteriorMaster>;
+                    if (InteriorQuestion != null)
+                    {
+                        <tr>
+                            <th colspan="4">@InteriorQuestion.Header</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Status</th>
+                            <th>Comments</th>
+                        </tr>
+                        var itemNum = 1;
+
+                        for (int i = 0; i < InteriorQuestion.Fields.Count; i++)
+                        {
+                            Model.Interiors.Add(new B1900Interior());
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @InteriorQuestion.Fields[i].Descr
+                                    <input asp-for="@Model.Interiors[i].DescriptionId" value="@InteriorQuestion.Fields[i].Id" type="hidden" />
+                                </td>
+                                <td>
+                                    <select width="100%" asp-for="@Model.Interiors[i].Status">
+                                            <option value="N/A" selected>N/A</option>
+                                            <option value="Bad Condition">Bad Condition</option>
+                                            <option value="Good Condition">Good Condition</option>
+                                            <option value="Excellent Condition">Excellent Condition</option>
+                                        </select>
+                                   @*<textarea asp-for="@Model.interiors[i].Status" required rows="3" maxlength="150"></textarea>*@
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Interiors[i].Comments" rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+
+                        }
+                    }
+                }
+
+                <!-- Add ghost row which is used to append row in table -->
+            </tbody>
+
+        </table>
+        
+        <!--Exterior Table-->
+        <table slot="table">
+            <thead>
+            </thead>
+
+            <tbody>
+                @{
+                    //preFlightAssesment
+
+                    var Exterior = ViewData["Exterior"] as Table<B1900ExteriorMaster>;
+                    if (Exterior != null)
+                    {
+                        <tr>
+                            <th colspan="4">@Exterior.Header</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Status</th>
+                            <th>Comments</th>
+                        </tr>
+                        var itemNum = 1;
+                        for (int i = 0; i < Exterior.Fields.Count; i++)
+                        {
+                            Model.Exteriors.Add(new B1900Exterior());
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @Exterior.Fields[i].Descr
+                                </td>
+
+
+                                <input asp-for="@Model.Exteriors[i].DescriptionId" value="@Exterior.Fields[i].Id" type="hidden" />
+                                <td>
+                                    <select width="100%" asp-for="@Model.Exteriors[i].Status" value="">
+                                        <option value="N/A" selected>N/A</option>
+                                        <option value="Bad Condition">Bad Condition</option>
+                                        <option value="Good Condition">Good Condition</option>
+                                        <option value="Excellent Condition">Excellent Condition</option>
+                                    </select>
+                                    @*<textarea asp-for="@Model.exteriors[i].Status" required rows="3" placeholder="" type="text" maxlength="150"></textarea>-->*@
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Exteriors[i].Comments" rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                    }
+                }
+
+            </tbody>
+
+        </table>
+
+        <!--Cockpit Folder-->
+        <table slot="table">
+            <thead>
+            </thead>
+
+            <tbody>
+                @{
+                    //preFlightAssesment
+                    var Cockpit = ViewData["Cockpit"] as Table<B1900CockpitMaster>;
+                    if (Cockpit != null)
+                    {
+                        <tr>
+                            <th colspan="4">@Cockpit.Header</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Expiry Date</th>
+                            <th>Status</th>
+                            <th>Comments</th>
+                        </tr>
+                        var itemNum = 1;
+                        for (int i = 0; i < Cockpit.Fields.Count; i++)
+                        {
+                            Model.Cockpits.Add(new B1900Cockpit());
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @Cockpit.Fields[i].Descr
+                                </td>
+                                <input asp-for="@Model.Cockpits[i].DescriptionId" value="@Cockpit.Fields[i].Id" type="hidden" />
+                                <td>
+                                    <textarea width="100%" rows="3" asp-for="@Model.Cockpits[i].ExpiryDate" required placeholder=""  type="date" maxlength="150" ></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Cockpits[i].Status" required rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Cockpits[i].Comments" rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                    }
+
+                }
+
+            </tbody>
+
+        </table>
+
+        <!--Cabin Table-->
+
+        <table slot="table">
+            <thead>
+            </thead>
+
+            <tbody>
+                @{
+                    //preFlightAssesment
+                    var Cabin = ViewData["Cabin"] as Table<B1900CabinMaster>;
+                    if (Cabin != null)
+                    {
+                        <tr>
+                            <th colspan="4">@Cabin.Header</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Expiry Date</th>
+                            <th>Status</th>
+                            <th>Comments</th>
+                        </tr>
+                        var itemNum = 1;
+                        for (int i = 0; i < Cabin.Fields.Count; i++)
+                        {
+                            Model.Cabins.Add(new B1900Cabin());
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @Cabin.Fields[i].Descr
+                                </td>
+                                <input asp-for="@Model.Cabins[i].DescriptionId" value="@Cabin.Fields[i].Id" type="hidden" />
+                                <td>
+                                    <textarea width="100%" rows="3" asp-for="@Model.Cabins[i].ExpiryDate" required placeholder="" type="date" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Cabins[i].Status" required rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Cabins[i].Comments" rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                    }
+                }
+
+            </tbody>
+
+        </table>
+        <!--Flight Red Folder-->
+        <table slot="table">
+            <thead>
+            </thead>
+
+            <tbody>
+                @{
+                    var FlightFolder = ViewData["FlightFolder"] as Table<B1900FlightRedFolderMaster>;
+                    if (FlightFolder != null)
+                    {
+                        <tr>
+                            <th colspan="4">@FlightFolder.Header</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Date (if appl.)</th>
+                            <th>Rev Status</th>
+                            <th>Comments</th>
+                        </tr>
+                        var itemNum = 1;
+                        for (int i = 0; i < FlightFolder.Fields.Count; i++)
+                        {
+                            Model.FlightFolders.Add(new B1900FlightFolder());
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @FlightFolder.Fields[i].Descr
+                                </td>
+                                <input asp-for="@Model.FlightFolders[i].DescriptionId" value="@FlightFolder.Fields[i].Id" type="hidden" />
+                                <td>
+                                    <input asp-for="@Model.FlightFolders[i].ExpiryDate" required placeholder="" value="@DateTime.Today.ToString("yyyy-MM-dd")" type="date" maxlength="150" />
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.FlightFolders[i].Status" required rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.FlightFolders[i].Comments" rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                    }
+
+                }
+
+            </tbody>
+
+        </table>
+
+
+        <table slot="table">
+            <tbody>
+
+                @{
+                    var Manuals = ViewData["Manuals"] as Table<B1900ManualsMaster>;
+                    if (Manuals != null)
+                    {
+                        <tr>
+                            <th colspan="7">@Manuals.Header</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th rowspan="1" colspan="3">Manual Ref Number</th>
+                            <th rowspan="2" colspan="1">Rev Status</th>
+                            <th rowspan="2" colspan="1">Doc Format</th>
+                            <th rowspan="2" colspan="1">Comments</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th rowspan="1" colspan="1">Pub No.</th>
+                            <th rowspan="1" colspan="1">Set No.</th>
+                            <th rowspan="1" colspan="1">Vol No.</th>
+                        </tr>
+                        var itemNum = 1;
+                        for (int i = 0; i < Manuals.Fields.Count; i++)
+                        {
+                            Model.Manuals.Add(new B1900Manuals());
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @Manuals.Fields[i].Descr
+                                </td>
+                                <input asp-for="@Model.Manuals[i].DescriptionId" value="@Manuals.Fields[i].Id" type="hidden" />
+                                <td>
+                                    <textarea asp-for="@Model.Manuals[i].PublicationNumber" required rows="3" placeholder="" type="text" maxlength="25" class="smallCell"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Manuals[i].SetNumber" required rows="3" placeholder="" type="text" maxlength="25" class="smallCell"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Manuals[i].VolumeNumber" required rows="3" placeholder="" type="text" maxlength="25" class="smallCell"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Manuals[i].RevStatus" required rows="3" placeholder="" type="text" maxlength="150" class="smallCell"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Manuals[i].DocumentFormat" required rows="3" placeholder="" type="text" maxlength="25" class="smallCell"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Manuals[i].Comments" rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                    }
+                }
+            </tbody>
+
+        </table>
+        <page></page>
+        <!--IPAD Manuals-->
+        <table slot="table">
+            <tbody>
+                @{
+                    var ManualsIPad = ViewData["ManualsIPad"] as Table<B1900ManualsIPadMaster>;
+                    if (ManualsIPad != null)
+                    {
+                        <tr>
+                            <th colspan="7">@ManualsIPad.Header</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th rowspan="1" colspan="2">Manual Ref Number</th>
+                            <th rowspan="1" colspan="1">IPAD FO</th>
+                            <th rowspan="1" colspan="1">IPAD PIC</th>
+                            <th rowspan="2" colspan="1">Rev Status</th>
+                            <th rowspan="2" colspan="1">Comments</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th rowspan="1" colspan="1">Pub No.</th>
+                            <th rowspan="1" colspan="1">Vol No.</th>
+                            <th rowspan="1" colspan="1">Set No.</th>
+                            <th rowspan="1" colspan="1">Set No.</th>
+                        </tr>
+                        var itemNum = 1;
+                        for (int i = 0; i < ManualsIPad.Fields.Count; i++)
+                        {
+                            Model.ManualsIPad.Add(new B1900ManualsIPad());
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @ManualsIPad.Fields[i].Descr
+                                </td>
+                                <input asp-for="@Model.ManualsIPad[i].DescriptionId" value="@ManualsIPad.Fields[i].Id" type="hidden" />
+                                <td>
+                                    <textarea asp-for="@Model.ManualsIPad[i].PublicationNumber" required rows="3" placeholder="" type="text" maxlength="25" class="smallCell"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.ManualsIPad[i].VolumeNumber" required rows="3" placeholder="" type="text" maxlength="25" class="smallCell"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.ManualsIPad[i].SetNumberFO" required rows="3" placeholder="" type="text" maxlength="25" class="smallCell"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.ManualsIPad[i].SetNumberPIC" required rows="3" placeholder="" type="text" maxlength="25" class="smallCell"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.ManualsIPad[i].RevStatus" required rows="3" placeholder="" type="text" maxlength="150" class="smallCell"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.ManualsIPad[i].Comments" rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+        <!--OPS Docs Equipment-->
+        <table slot="table">
+            <tbody>
+                @{
+                    var OpsDocs = ViewData["OpsDocs"] as Table<B1900OpsDocsEquipmentMaster>;
+                    if (OpsDocs != null)
+                    {
+                        <tr>
+                            <th colspan="7">@OpsDocs.Header</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th rowspan="1">Date (if appl.)</th>
+                            <th rowspan="1">Rev Status / Form or Manual #</th>
+                            <th rowspan="1">Comments</th>
+                        </tr>
+                        var itemNum = 1;
+                        for (int i = 0; i < OpsDocs.Fields.Count; i++)
+                        {
+                            Model.OperationDocuments.Add(new B1900OperationDocuments());
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @OpsDocs.Fields[i].Descr
+                                </td>
+                                <input asp-for="@Model.OperationDocuments[i].DescriptionId" value="@OpsDocs.Fields[i].Id" type="hidden" />
+                                <td>
+                                    <input asp-for="@Model.OperationDocuments[i].DateIfApplicable" required placeholder="" value="@DateTime.Today.ToString("yyyy-MM-dd")" type="date" maxlength="150" />
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.OperationDocuments[i].RevStatus" required rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.OperationDocuments[i].Comments" rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+        <!--Aircraft Flip File-->
+        <table slot="table">
+            <tbody>
+                @{
+
+
+                    var AircraftFlipFile = ViewData["AircraftFlipFile"] as Table<B1900AircraftFlipFileMaster>;
+                    if (AircraftFlipFile != null)
+                    {
+                        <tr>
+                            <th colspan="7">@AircraftFlipFile.Header</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th rowspan="1">Date (if appl.)</th>
+                            <th rowspan="1"> Rev Status / QTY</th>
+                            <th rowspan="1">Comments</th>
+                        </tr>
+                        var itemNum = 1;
+                        for (int i = 0; i < AircraftFlipFile.Fields.Count; i++)
+                        {
+                            Model.AircraftFlipFiles.Add(new B1900AircraftFlipFile());
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @AircraftFlipFile.Fields[i].Descr
+                                </td>
+                                <input asp-for="@Model.AircraftFlipFiles[i].DescriptionId" value="@AircraftFlipFile.Fields[i].Id" type="hidden" />
+                                <td>
+                                    <input asp-for="@Model.AircraftFlipFiles[i].DateIfApplicable" required placeholder="" value="@DateTime.Today.ToString("yyyy-MM-dd")" type="date" maxlength="150" />
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.AircraftFlipFiles[i].RevStatusQTY" required rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.AircraftFlipFiles[i].Comments" rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+
+                        }
+
+                    }
+                }
+            </tbody>
+        </table>
+        <!--Equipment-->
+        <table slot="table">
+            <tbody>
+                @{
+
+
+                    var Equipment = ViewData["Equipment"] as Table<B1900EquipmentMaster>;
+                    if (Equipment != null)
+                    {
+                        <tr>
+                            <th colspan="7">@Equipment.Header</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th rowspan="1">Date (if appl.)</th>
+                            <th rowspan="1">QTY</th>
+                            <th rowspan="1">Comments</th>
+                        </tr>
+                        var itemNum = 1;
+                        for (int i = 0; i < Equipment.Fields.Count; i++)
+                        {
+                            Model.Equipment.Add(new B1900Equipment());
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @Equipment.Fields[i].Descr
+                                </td>
+                                <input asp-for="@Model.Equipment[i].DescriptionId" value="@Equipment.Fields[i].Id" type="hidden" />
+                                <td>
+                                    <input asp-for="@Model.Equipment[i].DateIfApplicable" required placeholder="" value="@DateTime.Today.ToString("yyyy-MM-dd")" type="date" maxlength="150" />
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Equipment[i].RevStatusQTY" required rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea asp-for="@Model.Equipment[i].Comments" rows="3" placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+        <!--Additional Items-->
+        <table slot="table">
+            <tr>
+                <th colspan="7">Additional Items</th>
+            </tr>
+            <tr>
+                <th>Item</th>
+                <th rowspan="1">Date (if appl.)</th>
+                <th rowspan="1"> Rev Status / QTY</th>
+                <th rowspan="1">Comments</th>
+            </tr>
+            <tbody>
+                @for (int i = 1; i <= 5; i++)
+                {
+                    <tr>
+                        <td>
+                            <input placeholder="Item Name" name="addItemName" type="text" maxlength="150" />
+                        </td>
+                        <td>
+                            <input placeholder="" name="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" type="date" maxlength="150" />
+                        </td>
+                        <td>
+                            <textarea rows="3" placeholder="" name="Qty" type="text" maxlength="150"></textarea>
+                        </td>
+                        <td>
+                            <textarea rows="3" placeholder="" name="comments" type="text" maxlength="150"></textarea>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div style="padding:8px; display:flex; flex-direction:row; border:1px solid black;">
+            <div style="max-width:75%;display:flex; border-right:1px solid black; ">
+                I hereby certify that I have checked the aircraft and declare this document a true reflection of the status of the aircraft equipment and documentation.
+                I also acknowledge that the crew has read all documents on ASQS under the document Module
+            </div>
+            <div>
+                Signed
+            </div>
+        </div>
+
+    </nac-table-pager>
+    <input class="btn btn-primary" type="submit" value="Submit" style="position:initial;" />
+
+</form>

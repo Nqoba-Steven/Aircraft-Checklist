@@ -1,0 +1,672 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using NAC_Aircraft_Checklist.Util.Table;
+@using NAC_Aircraft_Checklist.Models.Proof.Learjet;
+@using NAC_Aircraft_Checklist.Models.Entities;
+@using NAC_Aircraft_Checklist.Models.Tables;
+@model NAC_Aircraft_Checklist.Models.Proof.Document.LearjetProofDocument;
+
+@{
+
+}
+<style>
+
+
+    table {
+        width: 90%;
+        border-collapse: collapse;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 4px;
+    }
+
+    td {
+        text-align: left;
+        font-size: 9pt;
+    }
+
+    th {
+        text-align: center;
+    }
+
+    td {
+        position: relative;
+    }
+
+    textarea {
+        border: none;
+        resize: none;
+    }
+
+    .colspan-3 {
+        width: 100px;
+    }
+
+    .rowspan-2 {
+        height: 25px;
+    }
+
+    .documentDetails {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .documentDetailsRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .documentDetailsItem {
+        display: flex;
+        flex-direction: row;
+        width: 40%;
+        justify-content: space-between;
+    }
+
+</style>
+<nac-document-header src="/img/logo.png" document-number="OPS-035c" document-title="Aircraft Checklist - Learjet"></nac-document-header>
+
+<!--Document Details-->
+@{
+    var proof = ViewData["Proof"] as LearjetProof;
+    var aircraft = ViewData["Aircraft"] as Aircraft;
+    <table style="width:100%;">
+        <tbody>
+            <tr>
+                <td style="border:none;">Aircraft registration</td>
+                <td style="border:none;">
+                    <div>@aircraft.Reg</div>
+                </td>
+                <td style="border:none;text-align:end;">Date</td>
+                <td style="border:none;text-align:end;">
+                    <input disabled style="width:100%;" required value="@proof.Date.ToString("yyyy-mm-dd")" type="date" />
+                </td>
+
+            </tr>
+            <tr>
+                <td style="border:none;"> Base of Operations</td>
+                <td style="border:none;">
+                    <input disabled style="width:100%;" required value="@proof.BaseOfOperations" type="text" />
+                </td>
+                <td style="border:none;">Completed By</td>
+                <td style="border:none;">
+                    <input disabled style="width:100%;" required value="@proof.User" type="text" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+<nac-table-pager validate="false">
+    <!--Interior Table-->
+    <table slot="table">
+        <thead>    </thead>
+        <tbody>
+
+            @{
+                var InteriorQuestion = ViewData["Interior"] as Table<LearjetInteriorMaster>;
+                if (InteriorQuestion != null)
+                {
+                    <tr>
+                        <th colspan="4">@InteriorQuestion.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>Status</th>
+                        <th>Comments</th>
+                    </tr>
+                    var itemNum = 1;
+                    if (Model.Interiors.Count > 0)
+                        for (int i = 0; i < InteriorQuestion.Fields.Count; i++)
+                        {
+                            Model.Interiors.Add(new LearjetProofInterior());
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @InteriorQuestion.Fields[i].Descr
+
+                                </td>
+                                <td>
+                                    <textarea disabled rows="3" maxlength="150">
+                                        @Model.Interiors[i].Status
+                                                                                                                                                                                                        </textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled rows="3" placeholder="" type="text" maxlength="150">
+                                        @Model.Interiors[i].Comments
+                                                                                                                                                                                                         </textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+
+                        }
+                }
+            }
+
+            <!-- Add ghost row which is used to append row in table -->
+        </tbody>
+
+    </table>
+
+    <!--Exterior Table-->
+    <table slot="table">
+        <thead>
+        </thead>
+
+        <tbody>
+            @{
+                //preFlightAssesment
+
+                var Exterior = ViewData["Exterior"] as Table<LearjetExteriorMaster>;
+                if (Exterior != null)
+                {
+                    <tr>
+                        <th colspan="4">@Exterior.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>Status</th>
+                        <th>Comments</th>
+                    </tr>
+                    var itemNum = 1;
+                    if (Model.Exteriors.Count > 0)
+                        for (int i = 0; i < Exterior.Fields.Count; i++)
+                        {
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @Exterior.Fields[i].Descr
+                                </td>
+                                <td>
+                                    <textarea disabled required rows="3" placeholder="" type="text" maxlength="150">
+                                        @Model.Exteriors[i].Status
+
+                                </td>
+                                <td>
+                                    <textarea disabled rows="3" placeholder="" type="text" maxlength="150">
+                                        @Model.Exteriors[i].Comments
+                                                                                                                                                                                                        </textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                }
+            }
+
+        </tbody>
+
+    </table>
+
+    <!--Cockpit Folder-->
+    <table slot="table">
+        <thead>
+        </thead>
+
+        <tbody>
+            @{
+                //preFlightAssesment
+                var Cockpit = ViewData["Cockpit"] as Table<LearjetCockpitMaster>;
+                if (Cockpit != null)
+                {
+                    <tr>
+                        <th colspan="4">@Cockpit.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>Expiry Date</th>
+                        <th>Status</th>
+                        <th>Comments</th>
+                    </tr>
+                    var itemNum = 1;
+                    if (Model.Cockpits.Count > 0)
+                        for (int i = 0; i < Cockpit.Fields.Count; i++)
+                        {
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @Cockpit.Fields[i].Descr
+                                </td>
+                                <td>
+                                    <textarea disabled value="@Model.Cockpits[i].ExpiryDate" required placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled required rows="3" placeholder="" type="text" maxlength="150">
+                                        @Model.Cockpits[i].Status
+                                                                                                                                                                                                        </textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled rows="3" placeholder="" type="text" maxlength="150">
+                                        @Model.Cockpits[i].Comments
+                                                                                                                                                                                                        </textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                }
+
+            }
+
+        </tbody>
+
+    </table>
+
+    <!--Cabin Table-->
+
+    <table slot="table">
+        <thead>
+        </thead>
+
+        <tbody>
+            @{
+                //preFlightAssesment
+                var Cabin = ViewData["Cabin"] as Table<LearjetCabinMaster>;
+                if (Cabin != null)
+                {
+                    <tr>
+                        <th colspan="4">@Cabin.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>Expiry Date</th>
+                        <th>QTY Status</th>
+                        <th>Comments</th>
+                    </tr>
+                    var itemNum = 1;
+                    if (Model.Cabins.Count > 0)
+                        for (int i = 0; i < Cabin.Fields.Count; i++)
+                        {
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @Cabin.Fields[i].Descr
+                                </td>
+                                <td>
+                                    <textarea disabled value="@Model.Cabins[i].ExpiryDate" required placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled required rows="3" placeholder="" type="text" maxlength="150">
+                                        @Model.Cabins[i].QtyStatus
+                                                                                                                                                                                                        </textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled rows="3" placeholder="" type="text" maxlength="150">
+                                        @Model.Cabins[i].Comments
+                                                                                                                                                                                                        </textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                }
+            }
+
+        </tbody>
+
+    </table>
+    <!--Flight Red Folder-->
+    <table slot="table">
+        <thead>
+        </thead>
+
+        <tbody>
+            @{
+                var FlightFolder = ViewData["FlightFolder"] as Table<LearjetFlightFolderMaster>;
+                if (FlightFolder != null)
+                {
+                    <tr>
+                        <th colspan="4">@FlightFolder.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>Date (if appl.)</th>
+                        <th>Rev Status</th>
+                        <th>Comments</th>
+                    </tr>
+                    var itemNum = 1;
+                    if (Model.FlightFolders.Count > 0)
+                        for (int i = 0; i < FlightFolder.Fields.Count; i++)
+                        {
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @FlightFolder.Fields[i].Descr
+                                </td>
+                                <td>
+                                    <textarea disabled value="@Model.FlightFolders[i].DateIfApplicable" required placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled required rows="3" placeholder="" type="text" maxlength="150">
+                                        @Model.FlightFolders[i].RevStatus
+                                                                                                                                                                                                        </textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled rows="3" placeholder="" type="text" maxlength="150">
+                                        @Model.FlightFolders[i].Comments
+                                                                                                                                                                                                        </textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                }
+
+            }
+
+        </tbody>
+
+    </table>
+
+
+    <table slot="table">
+        <tbody>
+
+            @{
+                var Manuals = ViewData["Manuals"] as Table<LearjetManualsMaster>;
+                if (Manuals != null)
+                {
+                    <tr>
+                        <th colspan="7">@Manuals.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th rowspan="1" colspan="3">Manual Ref Number</th>
+                        <th rowspan="2" colspan="1">Rev Status</th>
+                        <th rowspan="2" colspan="1">Doc Format</th>
+                        <th rowspan="2" colspan="1">Comments</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th rowspan="1" colspan="1">Pub No.</th>
+                        <th rowspan="1" colspan="1">Set No.</th>
+                        <th rowspan="1" colspan="1">Vol No.</th>
+                    </tr>
+                    var itemNum = 1;
+                    if (Model.Manuals.Count > 0)
+                        for (int i = 0; i < Manuals.Fields.Count; i++)
+                        {
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @Manuals.Fields.[i].Descr
+                                </td>
+                                <td>
+                                    <textarea disabled required rows="3" placeholder="" type="text" maxlength="25" class="smallCell">@Model.Manuals[i].PublicationNumber</textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled required rows="3" placeholder="" type="text" maxlength="25" class="smallCell">@Model.Manuals[i].SetNumber</textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled required rows="3" placeholder="" type="text" maxlength="25" class="smallCell">@Model.Manuals[i].VolumeNumber</textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled required rows="3" placeholder="" type="text" maxlength="25" class="smallCell">@Model.Manuals[i].RevStatus</textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled required rows="3" placeholder="" type="text" maxlength="25" class="smallCell">@Model.Manuals[i].DocumentFormat</textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled rows="3" placeholder="" type="text" maxlength="150">@Model.Manuals[i].Comments</textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                }
+            }
+        </tbody>
+
+    </table>
+    <page></page>
+    <!--IPAD Manuals-->
+    <table slot="table">
+        <tbody>
+            @{
+                var ManualsIPad = ViewData["ManualsEFB"] as Table<LearjetManualsEFBMaster>;
+
+                if (ManualsIPad != null)
+                {
+                    <tr>
+                        <th colspan="7">@ManualsIPad.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th rowspan="1" colspan="2">Manual Ref Number</th>
+                        <th rowspan="1" colspan="1">IPAD FO</th>
+                        <th rowspan="1" colspan="1">IPAD PIC</th>
+                        <th rowspan="2" colspan="1">Rev Status</th>
+                        <th rowspan="2" colspan="1">Comments</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th rowspan="1" colspan="1">Pub No.</th>
+                        <th rowspan="1" colspan="1">Vol No.</th>
+                        <th rowspan="1" colspan="1">Set No.</th>
+                        <th rowspan="1" colspan="1">Set No.</th>
+                    </tr>
+                    var itemNum = 1;
+                    for (int i = 0; i < ManualsIPad.Fields.Count; i++)
+                    {
+                        <tr>
+                            <td class="rowName">
+                                @itemNum . @Manuals.Fields.[i].Descr
+                            </td>
+                            <td>
+                                <textarea rows="3" placeholder="" name="pubNum" type="text" maxlength="25" class="smallCell"> @Model.ManualsEFB[i].PublicationNumber</textarea>
+                            </td>
+                            <td>
+                                <textarea rows="3" placeholder="" name="VolumeNumber" type="text" maxlength="25" class="smallCell">@Model.ManualsEFB[i].VolumeNumber</textarea>
+                            </td>
+                            <td>
+                                <textarea rows="3" placeholder="" name="SetNumberFO" type="text" maxlength="25" class="smallCell">@Model.ManualsEFB[i].SetNumberFO</textarea>
+                            </td>
+                            <td>
+                                <textarea rows="3" placeholder="" name="SetNumberPIC" type="text" maxlength="25" class="smallCell">@Model.ManualsEFB[i].SetNumberPIC</textarea>
+                            </td>
+                            <td>
+                                <textarea rows="3" placeholder="" name="RevStatus" type="text" maxlength="25" class="smallCell">@Model.ManualsEFB[i].RevStatus</textarea>
+                            </td>
+                            <td>
+                                <textarea rows="3" placeholder="" name="comments" type="text" maxlength="150">@Model.ManualsEFB[i].Comments</textarea>
+                            </td>
+                        </tr>
+                        itemNum++;
+                    }
+                }
+            }
+        </tbody>
+    </table>
+    <!--OPS Docs Equipment-->
+    <table slot="table">
+        <tbody>
+            @{
+                var OpsDocs = ViewData["OpsDocs"] as Table<LearjetOperationDocumentsEquipmentMaster>;
+                if (OpsDocs != null)
+                {
+                    <tr>
+                        <th colspan="7">@OpsDocs.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th rowspan="1">Date (if appl.)</th>
+                        <th rowspan="1">Rev Status / Form or Manual #</th>
+                        <th rowspan="1">Comments</th>
+                    </tr>
+                    var itemNum = 1;
+                    if (Model.OperationDocuments.Count > 0)
+                        for (int i = 0; i < OpsDocs.Fields.Count; i++)
+                        {
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @OpsDocs.Fields[i].Descr
+                                </td>
+                                <td>
+                                    <textarea disabled value="@Model.OperationDocuments[i].DateIfApplicable" required placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled required rows="3" placeholder="" type="text" maxlength="150">@Model.OperationDocuments[i].RevStatusQTY</textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled rows="3" placeholder="" type="text" maxlength="150">@Model.OperationDocuments[i].Comments</textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                }
+            }
+        </tbody>
+    </table>
+    <!--Aircraft Flip File-->
+    <table slot="table">
+        <tbody>
+            @{
+
+
+                var AircraftFlipFile = ViewData["AircraftFlipFile"] as Table<LearjetAircraftFlipFileMaster>;
+                if (AircraftFlipFile != null)
+                {
+                    <tr>
+                        <th colspan="7">@AircraftFlipFile.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th rowspan="1">Date (if appl.)</th>
+                        <th rowspan="1"> Rev Status / QTY</th>
+                        <th rowspan="1">Comments</th>
+                    </tr>
+                    var itemNum = 1;
+                    if (Model.AircraftFlipFiles.Count > 0)
+                        for (int i = 0; i < AircraftFlipFile.Fields.Count; i++)
+                        {
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @AircraftFlipFile.Fields[i].Descr
+                                </td>
+                                <td>
+                                    <textarea disabled value="@Model.AircraftFlipFiles[i].DateIfApplicable" required placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled required rows="3" placeholder="" type="text" maxlength="150">@Model.AircraftFlipFiles[i].RevStatusQTY</textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled rows="3" placeholder="" type="text" maxlength="150">@Model.AircraftFlipFiles[i].Comments</textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+
+                        }
+
+                }
+            }
+        </tbody>
+    </table>
+    <!--Equipment-->
+    <table slot="table">
+        <tbody>
+            @{
+
+
+                var Equipment = ViewData["Equipment"] as Table<LearjetEquipmentMaster>;
+                if (Equipment != null)
+                {
+                    <tr>
+                        <th colspan="7">Equipment.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th rowspan="1">Date (if appl.)</th>
+                        <th rowspan="1">QTY</th>
+                        <th rowspan="1">Comments</th>
+                    </tr>
+                    var itemNum = 1;
+                    if (Model.Equipment.Count > 0)
+                        for (int i = 0; i < Equipment.Fields.Count; i++)
+                        {
+                            <tr>
+                                <td class="rowName">
+                                    @itemNum . @Equipment.Fields[i].Descr
+                                </td>
+                                <td>
+                                    <textarea disabled value="@Model.Equipment[i].DateIfApplicable" required placeholder="" type="text" maxlength="150"></textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled required rows="3" placeholder="" type="text" maxlength="150">@Model.Equipment[i].RevStatusQTY</textarea>
+                                </td>
+                                <td>
+                                    <textarea disabled rows="3" placeholder="" type="text" maxlength="150">@Model.Equipment[i].Comments</textarea>
+                                </td>
+                            </tr>
+                            itemNum++;
+                        }
+                }
+            }
+        </tbody>
+    </table>
+    <!--Additional Items-->
+    <table slot="table">
+        <tr>
+            <th colspan="7">Additional Items</th>
+        </tr>
+        <tr>
+            <th>Item</th>
+            <th rowspan="1">Date (if appl.)</th>
+            <th rowspan="1"> Rev Status / QTY</th>
+            <th rowspan="1">Comments</th>
+        </tr>
+        <tbody>
+            @{
+                //var AdditionalItems = ViewData["Cockpit"] as List<B1900CockpitMaster>;
+
+                if (Model.AdditionalItems.Count > 0)
+                {
+
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        <tr>
+                            <td>
+                                <input disabled value="@Model.AdditionalItems[i].ItemName" type="text" maxlength="150" />
+                            </td>
+                            <td>
+                                <textarea disabled value="@Model.AdditionalItems[i].DateIfApplicable" name="date" type="text" maxlength="150"></textarea>
+                            </td>
+                            <td>
+                                <textarea disabled rows="3" type="text" maxlength="150">@Model.AdditionalItems[i].RevStatusQTY</textarea>
+                            </td>
+                            <td>
+                                <textarea disabled rows="3" type="text" maxlength="150">@Model.AdditionalItems[i].Comments</textarea>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        <tr>
+                            <td>
+                                <input value="" name="addItemName" type="text" maxlength="150" />
+                            </td>
+                            <td>
+                                <input placeholder="" name="date" type="date" maxlength="150" />
+                            </td>
+                            <td>
+                                <textarea rows="3" placeholder="" name="Qty" type="text" maxlength="150"></textarea>
+                            </td>
+                            <td>
+                                <textarea rows="3" disabled placeholder="" name="comments" type="text" maxlength="150"></textarea>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+
+    <div style="padding:8px; display:flex; flex-direction:row; border:1px solid black;">
+        <div style="max-width:75%;display:flex; border-right:1px solid black; ">
+            I hereby certify that I have checked the aircraft and declare this document a true reflection of the status of the aircraft equipment and documentation.
+            I also acknowledge that the crew has read all documents on ASQS under the document Module
+        </div>
+        <div>
+            Signed
+        </div>
+    </div>
+
+</nac-table-pager>
+

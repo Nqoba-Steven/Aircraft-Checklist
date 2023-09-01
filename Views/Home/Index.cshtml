@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using NAC_Aircraft_Checklist.Models.Users
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .mxList {
+        display: flex;
+        flex-flow: column;
+        list-style: none;
+    }
+
+        .mxList div {
+            margin-bottom: 16px;
+        }
+</style>
+@{
+}
+<script>
+    function openLink(href) {
+        window.location = href;
+    }
+</script>
+<div class="text-center">
+    <!--<div class="btn btn-primary btn-lg btn-block " onclick="openLink('/Email/SendTestMail')">Fill out 1900D Checklist</div>-->
+    @{
+        if (SignInManager.IsSignedIn(User))
+        {
+            <h3>1900D</h3>
+            <div class="mxList" style="margin-bottom:32px;">
+
+                <h4>Checklist</h4>
+                @if (User.IsInRole("Admin") || User.IsInRole("BaseManager"))
+                {
+                    <div class="btn btn-primary btn-lg btn-block " onclick="openLink('/B1900/')">Fill out 1900D Checklist</div>
+                }
+
+                @if (User.IsInRole("Admin") || User.IsInRole("Planner") || User.IsInRole("Manager"))
+                {
+                    <div class="btn btn-success btn-lg btn-block " onclick="openLink('/B1900/Documents/')">View Uploaded 1900D Checklists</div>
+                    
+                    <h4 style="margin-top:16px">Proof</h4>
+                    
+                    <div class="btn btn-info btn-lg btn-block" onclick="openLink('/Proof/B1900Create/')">Upload 1900D Proof</div>
+                    <div class="btn btn-info btn-lg btn-block" onclick="openLink('/Proof/B1900Proofs/')">View Uploaded 1900D Proofs</div>
+                }
+            </div>
+            <h3>Lear jet</h3>
+            <div class="mxList">
+                    <h4>Checklist</h4>
+                    @if (User.IsInRole("Admin") || User.IsInRole("BaseManager"))
+                    {
+                        <div class="btn btn-primary btn-lg btn-block"  onclick="openLink('/Learjet/')">Fill out Learjet 35A Checklist</div>
+                    }
+                    @if (User.IsInRole("Admin") || User.IsInRole("Planner") || User.IsInRole("Manager"))
+                    {
+                        <div class="btn btn-success btn-lg btn-block" onclick="openLink('/Learjet/Documents/')">View Uploaded Learjet 35A Checklists</div>
+                        <h4 style="margin-top:16px">Proof</h4>
+                        
+                        <div class="btn btn-info btn-lg btn-block" onclick="openLink('/Proof/LearjetCreate/')">Upload Learjet Proof</div>
+                        <div class="btn btn-info btn-lg btn-block"  onclick="openLink('/Proof/LearjetProofs/')">View Uploaded Learjet Proofs</div>
+                    }
+            </div>
+        }
+    }
+
+</div>

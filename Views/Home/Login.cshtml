@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>Welcome</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            min-width: 100vw;
+            min-height: 100vh;
+            background-image: url(../img/BG.jpg);
+            background-position: center;
+            background-size: cover;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(0px);
+            transition: backdrop-filter 1s;
+        }
+
+        .logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: url(../img/logo.png);
+        }
+    </style>
+    <nac-login timer="1" id="login" target="/Home/LoginAttempt"></nac-login>
+
+    <script>
+        let isBlured = false;
+        function $(id) { return document.getElementById(id) }
+        let body = document.querySelector('body');
+        body.addEventListener('click', (e) => {
+            if (!isBlured) {
+                isBlured = true;
+                //document.querySelector('nac-login').setAttribute('is-visible',true);
+                document.body.style.backdropFilter = "blur(10px)";
+            } else {
+
+            }
+        })
+    </script>
+    <div class="logo"><img alt="logo"  src="~/img/logo.png"/></div>
+    <script  src="~/js/NAC/components/NACLogin.js"></script>
+</body>
+</html>

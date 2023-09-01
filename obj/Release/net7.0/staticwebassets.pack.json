@@ -1,0 +1,389 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\obj\\Release\\net7.0\\scopedcss\\projectbundle\\NAC Aircraft Checklist.bundle.scp.css",
+      "PackagePath": "staticwebassets\\NAC Aircraft Checklist.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\DBSecrets\\DB",
+      "PackagePath": "staticwebassets\\DBSecrets"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\css\\NACStyles.css",
+      "PackagePath": "staticwebassets\\css\\NACStyles.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\css\\login.css",
+      "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\css\\print.css",
+      "PackagePath": "staticwebassets\\css\\print.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\img\\BG.jpg",
+      "PackagePath": "staticwebassets\\img\\BG.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\img\\helicopter.jpg",
+      "PackagePath": "staticwebassets\\img\\helicopter.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\img\\logo.png",
+      "PackagePath": "staticwebassets\\img\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\img\\ticketmaster\\Map.jpg",
+      "PackagePath": "staticwebassets\\img\\ticketmaster\\Map.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\img\\ticketmaster\\TicketMasterLogo.jpeg",
+      "PackagePath": "staticwebassets\\img\\ticketmaster\\TicketMasterLogo.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\img\\ticketmaster\\dstv.png",
+      "PackagePath": "staticwebassets\\img\\ticketmaster\\dstv.png"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\img\\ticketmaster\\logo2.jpg",
+      "PackagePath": "staticwebassets\\img\\ticketmaster\\logo2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\img\\ticketmaster\\tickect.jpeg",
+      "PackagePath": "staticwebassets\\img\\ticketmaster\\tickect.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACAdminAircraft.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACAdminAircraft.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACAdminAircraftItem.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACAdminAircraftItem.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACAuditTableField.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACAuditTableField.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACDocument.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACDocument.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACDocumentBody.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACDocumentBody.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACDocumentDetails.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACDocumentDetails.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACDocumentFooter.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACDocumentFooter.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACDocumentHeader.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACDocumentHeader.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACDocumentItem.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACDocumentItem.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACDocumentList.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACDocumentList.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACDropdown.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACDropdown.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACDropdownItem.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACDropdownItem.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACEmailer.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACEmailer.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACLogin.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACLogin.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACMailListItem.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACMailListItem.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\NACTablePager.js",
+      "PackagePath": "staticwebassets\\js\\NAC\\components\\NACTablePager.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\NAC\\components\\template",
+      "PackagePath": "staticwebassets\\js\\NAC\\components"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Stevenn\\Documents\\NAC Source Code\\NAC Aircraft Checklist\\wwwroot\\service-worker.js",
+      "PackagePath": "staticwebassets\\service-worker.js"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.NAC Aircraft Checklist.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.build.NAC Aircraft Checklist.props",
+      "PackagePath": "build\\NAC Aircraft Checklist.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.NAC Aircraft Checklist.props",
+      "PackagePath": "buildMultiTargeting\\NAC Aircraft Checklist.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.buildTransitive.NAC Aircraft Checklist.props",
+      "PackagePath": "buildTransitive\\NAC Aircraft Checklist.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

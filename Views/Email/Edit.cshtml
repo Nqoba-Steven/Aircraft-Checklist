@@ -1,0 +1,73 @@
+﻿@using NAC_Aircraft_Checklist.Models.Email;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model NAC_Aircraft_Checklist.Models.Email.Recipients.EmailRecipientPayload;
+
+@{
+    BaseManagerRecipient OriginalBaseManager = (BaseManagerRecipient)ViewData["OriginalBaseManager"];
+    PlannerRecipient OriginalPlanner = (PlannerRecipient)ViewData["OriginalPlanner"];
+    EscalationRecipient OriginalEscalation = (EscalationRecipient)ViewData["OriginalEscalation"];
+
+}
+<div>
+    @{
+        if (OriginalBaseManager != null)
+        {
+            <h1>Update Base Manager Recipient</h1>
+            <form action="/Email/Update?type=BaseManager">
+                <input hidden asp-for="@OriginalBaseManager.Id" name="id" />
+                <label>Name</label>
+                <input asp-for="@Model.BaseManagerRecipient.Name" value="@OriginalBaseManager.Name" type="text" required />
+                <label>Email Address</label>
+                <input asp-for="@Model.BaseManagerRecipient.EmailAddress" value="@OriginalBaseManager.EmailAddress" type="email" required />
+                <label>Is Active</label>
+                <input asp-for="@Model.BaseManagerRecipient.isActive" checked="@OriginalBaseManager.isActive" type="checkbox" />
+                <button class="btn btn-primary" type="submit">Update</button>
+            </form>
+            <form action="/Email/Delete?type=BaseManager&id=@OriginalBaseManager.Id">
+                <input hidden asp-for="@OriginalBaseManager.Id" name="id" />
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+        }
+        if (OriginalPlanner != null)
+        {
+            <h1>Update Planner Recipient</h1>
+            <form action="/Email/Update?type=Planner">
+                <input hidden asp-for="@OriginalPlanner.Id" name="id" />
+                <label>Name</label>
+                <input asp-for="@Model.PlannerRecipient.Name" value="@OriginalPlanner.Name" type="text" required />
+                <label>Email Address</label>
+                <input asp-for="@Model.PlannerRecipient.EmailAddress" value="@OriginalPlanner.EmailAddress" type="email" required />
+                <label>Is Active</label>
+                <input asp-for="@Model.PlannerRecipient.isActive" checked="@OriginalPlanner.isActive" type="checkbox" />
+                <button class="btn btn-primary" type="submit">Update</button>
+            </form>
+            <form action="/Email/Delete?type=Planner&id=@OriginalPlanner.Id">
+                <input hidden asp-for="@OriginalPlanner.Id" name="id" />
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+        }
+        if (OriginalEscalation != null)
+        {
+            <h1>Update Escalation Recipient</h1>
+            <form action="/Email/Update?type=Escalation">
+                <input hidden asp-for="@OriginalEscalation.Id" name="id" />
+                <label>Name</label>
+                <input asp-for="@Model.EscalationRecipient.Name" value="@OriginalEscalation.Name" type="text" required />
+                <label>Email Address</label>
+                <input asp-for="@Model.EscalationRecipient.EmailAddress" value="@OriginalEscalation.EmailAddress" type="email" required />
+                <label>Is Active</label>
+                <input asp-for="@Model.EscalationRecipient.isActive" checked="@OriginalEscalation.isActive" type="checkbox" />
+                <button class="btn btn-primary" type="submit">Update</button>
+            </form>
+            <form action="/Email/Delete?type=Escalation&id=@OriginalEscalation.Id">
+                <input hidden asp-for="@OriginalEscalation.Id" name="id" />
+                <button class="btn btn-danger"  type="submit">Delete</button>
+            </form>
+        }
+    }
+</div>
+

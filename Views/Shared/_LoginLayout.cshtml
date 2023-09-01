@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/NACStyles.css" asp-append-version="true" />
+    <style>
+        body {
+            background-position: center;
+            background-size: cover;
+        }
+
+        .logo {
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <main role="main" class="pb-3">
+                <div class="logo"><img alt="logo" src="~/img/logo.png" /></div>
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+           
+        </footer>
+        <script src="~/js/main.js"></script>
+        <script src="~/service-worker.js"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/NAC/components/NACEmailer.js"></script>
+        <!--NAC Document-->
+        <script src="~/js/NAC/components/NACDocumentDetails.js"></script>
+        <script src="~/js/NAC/components/NACDocumentHeader.js"></script>
+        <script src="~/js/NAC/components/NACDocumentBody.js"></script>
+        <script src="~/js/NAC/components/NACDocumentFooter.js"></script>
+        <script src="~/js/NAC/components/NACDocument.js"></script>
+        <!--NAC Table-->
+        <!--NAC Aircraft Admin-->
+        <script src="~/js/NAC/components/NACTablePager.js"></script>
+        <script src="~/js/NAC/components/NACDropdownItem.js"></script>
+        <script src="~/js/NAC/components/NACDropdown.js"></script>
+        <script src="~/js/NAC/components/NACAdminAircraftItem.js"></script>
+        <script src="~/js/NAC/components/NACAdminAircraft.js"></script>
+        <!--NAC Aircraft Admin-->
+        <script src="~/js/NAC/components/NACDocumentItem.js"></script>
+        <script src="~/js/NAC/components/NACMailListItem.js"></script>
+        <script src="~/js/NAC/components/NACDocumentList.js"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
+</head>
+</html>

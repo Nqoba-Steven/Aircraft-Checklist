@@ -1,0 +1,77 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using NAC_Aircraft_Checklist.Models.Entry.B1900;
+@using NAC_Aircraft_Checklist.Models.Entities;
+@{
+    // List<B1900Entry> entries = ViewData["Entries"] as List<B1900Entry>;
+    var months = (B1900Entry[][])ViewData["Entries"];
+    List<Aircraft> aircrafts = ViewData["Aircrafts"] as List<Aircraft>;
+}
+<script>
+    function openLink(target) {
+        window.location = target;
+    }
+    function proofRead(entryId, aircraftId, date) {
+        console.log(entryId)
+        console.log(aircraftId)
+        console.log(date)
+        var url = `/Proof/ProofRead1900?entryId=${entryId}&aircraftId=${aircraftId}&date=${date}`;
+        window.open(url, '_blank');
+    }
+
+</script>
+
+<h3>
+    1900D
+    <small class="text-muted"> Checklist Uploads</small>
+</h3>
+@{
+    if (months.Length > 0 && months != null)
+    {
+        foreach (var month in months)
+        {
+            <h3 style="margin-top:64px; border-top:2px solid black;">@month[0].Date.ToString("MMM yyyy")</h3>
+            <br />
+
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="h4">Base</th>
+                        <th class="h4">Aircraft</th>
+                        <th class="h4">CompletedBy By</th>
+                        <th class="h4">Date Created</th>
+                        <th class="h4">Revision</th>
+                        <th class="h4">Proof Read</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var e in month)
+                    {
+                        if (@aircrafts.FirstOrDefault(a => a.Id == e.AircraftId) != null)
+                        {
+                            <tr>
+                                <td onclick="openLink('/B1900/Document?id=@e.Id')" class="h5">@e.BaseOfOperations</td>
+                                <td onclick="openLink('/B1900/Document?id=@e.Id')" class="h5">@aircrafts.FirstOrDefault(a=>a.Id==e.AircraftId).Reg</td>
+                                <td onclick="openLink('/B1900/Document?id=@e.Id')" class="h5">@e.CompletedBy</td>
+                                <td onclick="openLink('/B1900/Document?id=@e.Id')" class="h5">@e.Date</td>
+                                <td onclick="openLink('/B1900/Document?id=@e.Id')" class="h5">@e.Revision</td>
+                                <td>
+                                    <button class="btn btn-danger" onclick="proofRead('@e.Id','@e.AircraftId','@e.Date')" type="button">Proof Read</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <br />
+
+
+        }
+
+    }
+    else
+    {
+        <h2 class="h2">No Checklists found</h2>
+    }
+}

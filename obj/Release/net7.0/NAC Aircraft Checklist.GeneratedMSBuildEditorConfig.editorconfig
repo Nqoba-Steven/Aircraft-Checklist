@@ -1,0 +1,233 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = NAC_Aircraft_Checklist
+build_property.RootNamespace = NAC_Aircraft_Checklist
+build_property.ProjectDir = C:\Users\Stevenn\Documents\NAC Source Code\NAC Aircraft Checklist\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Stevenn\Documents\NAC Source Code\NAC Aircraft Checklist
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Areas/Identity/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Areas/Identity/Pages/Account/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Areas/Identity/Pages/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Areas/Identity/Pages/Account/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Areas/Identity/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Account/CreateAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDcmVhdGVBY2NvdW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Account/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Admin/CreateB1900Revision.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlQjE5MDBSZXZpc2lvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Admin/CreateLearjetRevision.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlTGVhcmpldFJldmlzaW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Aircraft/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWlyY3JhZnRcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Aircraft/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWlyY3JhZnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/B1900/Document.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQjE5MDBcRG9jdW1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/B1900/Documents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQjE5MDBcRG9jdW1lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/B1900/DocumentTemplate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQjE5MDBcRG9jdW1lbnRUZW1wbGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/B1900/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQjE5MDBcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/B1900/IndexOld.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQjE5MDBcSW5kZXhPbGQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/B1900/Print.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQjE5MDBcUHJpbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Email/ComposeEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxcQ29tcG9zZUVtYWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Email/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Email/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Email/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Error/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Home/Admin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Home/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Learjet/Document.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhcmpldFxEb2N1bWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Learjet/Documents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhcmpldFxEb2N1bWVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Learjet/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhcmpldFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Learjet/Print.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhcmpldFxQcmludC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/PDF/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUERGXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Proof/B1900Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvb2ZcQjE5MDBDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Proof/B1900Proof.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvb2ZcQjE5MDBQcm9vZi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Proof/B1900ProofEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvb2ZcQjE5MDBQcm9vZkVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Proof/B1900Proofs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvb2ZcQjE5MDBQcm9vZnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Proof/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvb2ZcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Proof/LearjetCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvb2ZcTGVhcmpldENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Proof/LearjetProof.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvb2ZcTGVhcmpldFByb29mLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Proof/LearjetProofEdit .cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvb2ZcTGVhcmpldFByb29mRWRpdCAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Proof/LearjetProofs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvb2ZcTGVhcmpldFByb29mcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Proof/ProofRead1900.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvb2ZcUHJvb2ZSZWFkMTkwMC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Proof/ProofReadLearjet.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvb2ZcUHJvb2ZSZWFkTGVhcmpldC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Shared/_LoginLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Shared/_Print.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QcmludC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Stevenn/Documents/NAC Source Code/NAC Aircraft Checklist/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-xk6wmj417e

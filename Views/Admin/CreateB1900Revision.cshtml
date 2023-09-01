@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using NAC_Aircraft_Checklist.Models.Entry.Revisions;
+@model B1900Revision;
+@{
+    
+}
+
+
+<script>
+    function openPage(target) {
+        window.location = target;
+    }
+</script>
+<h1>Create B1900 Revision</h1>
+
+<form method="Post" action="/Admin/BuildB1900TableMaster">
+    <table>
+        <tr>
+            <td>Revision Number</td>
+            <td>
+                <input asp-for="@Model.RevisionNumber" type="number" />
+            </td>
+            <td>Revision Date</td>
+            <td>
+                <input asp-for="@Model.Date" type="date" />
+            </td>
+        </tr>
+    </table>
+    <button type="submit">Create</button>
+</form>
+<button onclick="openPage('/Admin/')">Cancel</button>

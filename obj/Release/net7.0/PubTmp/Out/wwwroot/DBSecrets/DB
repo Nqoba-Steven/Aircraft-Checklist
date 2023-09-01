@@ -1,0 +1,174 @@
+USE NACAircraftChecklist
+
+GO
+
+CREATE SCHEMA B1900
+
+GO 
+
+--Creates An Aircrafts Table
+Create Table B1900.Aircraft(
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	Reg varchar(20) not null unique,
+	Model varchar(50)
+);
+
+--Creates A Revisions Table
+--RevisionNumber should be IDENTITY(32,1) 
+Create Table B1900.Revisions(
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	RevisionNumber INT NOT NULL,
+	DateRevised DATE NOT NULL
+);
+
+CREATE TABLE B1900.DocumentUploads(
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	AircraftID INT FOREIGN KEY REFERENCES B1900.Aircraft (ID),  
+	RevisionID INT FOREIGN KEY REFERENCES B1900.Revisions (ID),  
+	CompletedBy VARCHAR(80) NOT NULL,
+	CompletedDate DATE NOT NULL,
+	OperationsBase VARCHAR(150)
+);
+
+--Master list
+
+CREATE TABLE B1900.MasterListInterior(
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	ItemDescription VARCHAR(250) not null,
+);
+
+CREATE TABLE B1900.MasterListExterior(
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	ItemDescription VARCHAR(250) not null,
+);
+
+CREATE TABLE B1900.MasterListCockpit(
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	ItemDescription VARCHAR(250) not null,
+);
+
+CREATE TABLE B1900.MasterListCabin(
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	ItemDescription VARCHAR(250) not null,
+);
+
+CREATE TABLE B1900.MasterListFlightRedFolder(
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	ItemDescription VARCHAR(250) not null,
+);
+
+CREATE TABLE B1900.MasterListManuals(
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	ItemDescription VARCHAR(250) not null,
+);
+
+CREATE TABLE B1900.MasterListOpsDocsEquipment(
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	ItemDescription VARCHAR(250) not null,
+);
+
+
+CREATE TABLE B1900.MasterListAircraftFlipFile(
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	ItemDescription VARCHAR(250) not null,
+);
+
+
+CREATE TABLE B1900.MasterListEquipment(
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	ItemDescription VARCHAR(250) not null,
+);
+
+--All posted content here
+--Document ID will be used to map the details of the item
+
+	Create Table B1900.PostedInterior(
+		ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+		DocumentID INT FOREIGN KEY REFERENCES B1900.DocumentUploads(ID),  
+		ItemDescription INT FOREIGN KEY REFERENCES B1900.MasterListInterior(ID),  
+		ItemStatus VARCHAR(150), 
+		ItemComment VARCHAR(350), 
+	);
+
+	Create Table B1900.PostedExterior(
+		ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+		DocumentID INT FOREIGN KEY REFERENCES B1900.DocumentUploads(ID),  
+		ItemDescription INT FOREIGN KEY REFERENCES B1900.MasterListExterior(ID),  
+		ItemStatus varchar(150), 
+		ItemComment varchar(350), 
+	);
+
+	Create Table B1900.PostedCockpit(
+		ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+		DocumentID INT FOREIGN KEY REFERENCES B1900.DocumentUploads(ID),  
+		ItemDescription INT FOREIGN KEY REFERENCES B1900.MasterListCockpit(ID),
+		ItemExpiryDate Date, 
+		ItemStatus varchar(150), 
+		ItemComment varchar(350), 
+	);
+
+	Create Table B1900.PostedCabin(
+		ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+		DocumentID INT FOREIGN KEY REFERENCES B1900.DocumentUploads(ID),  
+		ItemDescription INT FOREIGN KEY REFERENCES B1900.MasterListCabin(ID),
+		ItemExpiryDate Date, 
+		ItemQTYStatus varchar(150), 
+		ItemComment varchar(350), 
+	);
+	
+	Create Table B1900.PostedFlightRedFolder(
+		ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+		DocumentID INT FOREIGN KEY REFERENCES B1900.DocumentUploads(ID),  
+		ItemDescription INT FOREIGN KEY REFERENCES B1900.MasterListFlightRedFolder(ID),
+		ItemExpiryDate Date, 
+		ItemRevStatus varchar(150), 
+		ItemComment varchar(350), 
+	);
+		
+	Create Table B1900.PostedManuals (
+		ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+		DocumentID INT FOREIGN KEY REFERENCES B1900.DocumentUploads(ID),  
+		ItemDescription INT FOREIGN KEY REFERENCES B1900.MasterListManuals(ID),
+		ItemPubNo varchar(250), 
+		ItemSetNo varchar(250), 
+		ItemVolNo varchar(250), 
+		ItemRevStatus varchar(150), 
+		ItemDocFormat varchar(150), 
+		ItemComment varchar(350), 
+	);
+	
+	Create Table B1900.PostedOpsDocsEquipment(
+		ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+		DocumentID INT FOREIGN KEY REFERENCES B1900.DocumentUploads(ID),  
+		ItemDescription INT FOREIGN KEY REFERENCES B1900.MasterListOpsDocsEquipment(ID),
+		ItemDate Date, 
+		ItemRevStatus varchar(150), 
+		ItemComment varchar(350), 
+	);
+
+	Create Table B1900.PostedAircraftFlipFile(
+		ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+		DocumentID INT FOREIGN KEY REFERENCES B1900.DocumentUploads(ID),  
+		ItemDescription INT FOREIGN KEY REFERENCES B1900.MasterListAircraftFlipFile(ID),
+		ItemDate Date, 
+		ItemRevStatus varchar(150), 
+		ItemComment varchar(350), 
+	);
+
+	Create Table B1900.PostedEquipment(
+		ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+		DocumentID INT FOREIGN KEY REFERENCES B1900.DocumentUploads(ID),  
+		ItemDescription INT FOREIGN KEY REFERENCES B1900.MasterListEquipment(ID),
+		ItemDate Date, 
+		ItemRevStatusQTY varchar(150), 
+		ItemComment varchar(350), 
+	);
+
+	Create Table B1900.AdditionalItems(
+		ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+		DocumentID INT FOREIGN KEY REFERENCES B1900.DocumentUploads(ID),  
+		ItemDescription varchar(250) not null,
+		ItemDate Date, 
+		ItemRevStatusQTY varchar(150), 
+		ItemComment varchar(350), 
+	);

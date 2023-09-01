@@ -1,0 +1,32 @@
+﻿@{
+}
+@using NAC_Aircraft_Checklist.Models.Proof;
+@using NAC_Aircraft_Checklist.Models.Proof.B1900;
+@using NAC_Aircraft_Checklist.Models.Proof.Learjet;
+@*
+    Write Proof Models
+    //Get all and show in a list
+*@;
+
+@{
+    var b1900Proofs = ViewData["B1900Proofs"] as List<B1900Proof>;
+    if (b1900Proofs != null)
+    {
+        <nac-document-list card-title="B1900 Uploaded Proof Documents" headers="Create By,Date Created,Revision" post-target="/Proof/B1900Create">
+            @foreach (B1900Proof proof in b1900Proofs)
+            {
+                <nac-document-item action="/Proof/B1900Proof?id=@proof.Id" item-itemid="@proof.Id" created-by="@proof.User" revision="@proof.Revision" date-uploaded="@proof.Date" slot="item"></nac-document-item>
+            }
+        </nac-document-list>
+    }
+    var learjetProofs = ViewData["LearjetProofs"] as List<LearjetProof>;
+    if (learjetProofs != null)
+    {
+        <nac-document-list card-title="Learjet Uploaded Proof Documents" headers="Create By,Date Created,Revision" post-target="/Proof/LearjetCreate">
+            @foreach (LearjetProof proof in learjetProofs)
+            {
+                <nac-document-item action="/Proof/LearjetProof?id=@proof.Id" item-itemid="@proof.Id" created-by="@proof.User" revision="@proof.Revision" date-uploaded="@proof.Date" slot="item"></nac-document-item>
+            }
+        </nac-document-list>
+    }
+}

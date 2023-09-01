@@ -1,0 +1,207 @@
+﻿body {
+    padding-bottom:50px;
+}
+td {
+    font-size: 9pt !important;
+}
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    .divFooter {
+        position: absolute;
+        bottom: 0;
+    }
+    footer {
+        page-break-after: always;
+    }
+}
+@media print {
+    .page-break-after {
+        page-break-after: always;
+    }
+}
+
+/* This will show only on screen (always) */
+@media screen {
+    .page-break-after {
+        display: block;
+        border-bottom: 2px solid red;
+        overflow: visible;
+        position: relative;
+    }
+
+        .page-break-after:before {
+            content: "Page Break";
+            font-family: arial, helvetica, sans-serif;
+            color: red;
+            display: block;
+            font-size: 8px;
+            margin-top: -8px;
+        }
+}
+:-webkit-input-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+:-ms-input-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+select {
+    word-wrap: normal;
+    text-align: center;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 4px;
+}
+
+td {
+    text-align: left;
+    text-align: center;
+}
+
+td input[type="date"] {
+        display: block;
+        margin: 0 auto;
+}
+
+textarea {
+    width: 100%;
+    font-size: 11pt;
+    font-weight: 600;
+}
+
+.smallCol {
+    width: 84px;
+}
+
+textarea {
+    border: none;
+    resize: none;
+}
+
+select {
+    font-size: 11pt;
+    font-weight: 800;
+    min-width: 128px;
+    height: 32px;
+    text-align: center;
+}
+
+select option {
+        font-size: 11pt;
+        font-weight: 700;
+        text-align: center;
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    position: relative;
+    text-align: center;
+}
+
+
+
+input[type=date] {
+    text-align: center;
+    width: 100%;
+    max-width: 128px;
+    font-size: 12pt;
+    font-weight: 600;
+}
+
+.rowName {
+    max-width: 49%;
+    width: 45%;
+    font-size: 12pt;
+    text-align: left;
+}
+
+.alertFocus:focus-visible {
+    outline-color: red;
+}
+
+.colspan-3 {
+    width: 100px;
+}
+
+.rowspan-2 {
+    height: 25px;
+}
+
+.documentDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.documentDetailsRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.documentDetailsItem {
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    justify-content: space-between;
+}
+
+.emptyBlock {
+    background-color: #BDBDBD !important;
+}
+
+::placeholder {
+    text-align: center;
+}
+@page {
+    margin: 25mm;
+
+    @bottom-center {
+        content: "Footer";
+        font-family: Arial;
+        font-size: 16pt;
+        color: red;
+    }
+
+}

@@ -1,0 +1,112 @@
+﻿@using NAC_Aircraft_Checklist.Models.Email;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var uploadWaitLists = ViewData["UploadWaitList"] as List<UploadWaitList>;
+    var baseManagerRecipients = ViewData["BaseManagerRecipient"] as List<BaseManagerRecipient>;
+    var escalationRecipients = ViewData["EscalationRecipient"] as List<EscalationRecipient>;
+    var plannerRecipients = ViewData["PlannerRecipient"] as List<PlannerRecipient>;
+
+}
+<style>
+    .cardItem {
+    }
+
+        .cardItem:hover {
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        }
+
+    not:hover {
+        background-color: #fff;
+    }
+
+    .cardItem {
+        width: inherit;
+        min-width: fit-content;
+        min-height: 48px;
+        height: fit-content;
+        margin-bottom: 4px;
+        scroll-snap-align: start;
+        padding-left: 8px;
+        justify-content: space-between;
+    }
+</style>
+<script>
+    function editEntry(id) {
+        window.location = "/Email/Edit?id=" + id;
+    }
+</script>
+<h1>Email Controller</h1>
+
+<div id="container">
+    <h3>Upload Wait List</h3>
+    <nac-document-list post-target="/Email/Create?type=Upload" card-title="Email Recipient" headers="Name,Email,IsActive">
+        @{
+            if (uploadWaitLists != null)
+                foreach (var r in uploadWaitLists)
+                {
+                    <nac-mail-list-item slot="item" action="/Email/Edit?type=UploadRecipient&id=@r.Id"
+                                        display-name="@r.Name" email="@r.EmailAddress"
+                                        is-active="@r.isActive">
+
+                    </nac-mail-list-item>
+
+                }
+        }
+    </nac-document-list>
+    <h3>Basemanager List</h3>
+    <nac-document-list post-target="/Email/Create?type=BaseManager" card-title="Email Recipient" headers="Name,Email,IsActive">
+        @{
+            if (baseManagerRecipients != null)
+            {
+                foreach (var r in baseManagerRecipients)
+                {
+                    <nac-mail-list-item slot="item" action="/Email/Edit?type=BaseManager&id=@r.Id"
+                                        display-name="@r.Name" email="@r.EmailAddress"
+                                        is-active="@r.isActive">
+
+                    </nac-mail-list-item>
+
+                }
+            }
+        }
+    </nac-document-list>
+    <h3>Escalation List</h3>
+
+    <nac-document-list post-target="/Email/Create?type=Escalation" card-title="Email Recipient" headers="Name,Email,IsActive">
+        @{
+            if (escalationRecipients != null)
+            {
+                foreach (var r in escalationRecipients)
+                {
+                    <nac-mail-list-item slot="item" action="/Email/Edit?type=Escalation&id=@r.Id"
+                                        display-name="@r.Name" email="@r.EmailAddress"
+                                        is-active="@r.isActive">
+
+                    </nac-mail-list-item>
+
+                }
+            }
+        }
+    </nac-document-list>
+    <h3>Planner List</h3>
+    <nac-document-list post-target="/Email/Create?type=Planner" card-title="Email Recipient" headers="Name,Email,IsActive">
+        @{
+            if (plannerRecipients != null)
+            {
+                foreach (var r in plannerRecipients)
+                {
+                    <nac-mail-list-item slot="item" action="/Email/Edit?type=Planner&id=@r.Id"
+                                        display-name="@r.Name" email="@r.EmailAddress"
+                                        is-active="@r.isActive">
+
+                    </nac-mail-list-item>
+
+                }
+            }
+        }
+    </nac-document-list>
+</div>
+

@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using NAC_Aircraft_Checklist.Models.Email.Mail;
+@{
+
+}
+@model RichMail;
+
+
+<form action="/Email/SendRichMail" class="form">
+    <div>
+        <label class="form-label">From</label>
+        <input asp-for="@Model.From" class="form-control" name="from" type="email" />
+    </div>
+    <div>
+        <label class="form-label">To</label>
+        <input asp-for="@Model.To" class="form-control" name="to" type="email" />
+    </div>
+         <label class="form-label">Subject</label>
+        <input asp-for="@Model.Subject" class="form-control" name="subject" type="text" />
+    </div>
+    <div>
+        <label class="form-label">Body</label>
+        <textarea asp-for="@Model.Body" class="form-control" name="body" type="text"></textarea>
+    </div>
+
+    <div>
+        <label class="form-label">Images</label>
+    </div>
+    <button type="submit"> Send</button>
+</form>
+<img src="~/img/ticketmaster/dstv.png" />
+<img src="~/img/ticketmaster/logo2.jpg" />
+<img src="~/img/ticketmaster/Map.jpg" />

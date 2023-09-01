@@ -1,0 +1,1045 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Print.cshtml";
+}
+@{
+}
+@using NAC_Aircraft_Checklist.Models.Entry;
+@using NAC_Aircraft_Checklist.Models.Entry.Learjet;
+@using NAC_Aircraft_Checklist.Models.Entry.Revisions;
+@using NAC_Aircraft_Checklist.Models.Entities;
+@using NAC_Aircraft_Checklist.Models.Tables;
+@using NAC_Aircraft_Checklist.Models.Documents;
+@using NAC_Aircraft_Checklist.Util.Table;
+@model LearjetDocument;
+@{
+    var aircraft = ViewData["Aircraft"] as Aircraft;
+    var revision = ViewData["Revision"] as LearjetRevision;
+    var error = ViewData["ErrorMessage"] as string;
+    //var tables = ViewData["Tables"] as Table<
+
+}
+
+
+<nac-document-header src="/img/logo.png" document-number="OPS-035c" document-title="Aircraft Checklist - Learjet"></nac-document-header>
+<table class="divFooter">
+    <thead>
+        <tr></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@revision.RevisionNumber</td>
+            <td>@revision.Date</td>
+            <td>Page i of n</td>
+        </tr>
+    </tbody>
+</table>
+<table style="width:100%;">
+    <tbody>
+        <tr>
+            <td style="border:none;">Aircraft registration</td>
+            <td style="border:none;">
+                <input class="form-control" style="font-weight:600;font-size:11pt; width:100%;min-width:100%;text-align:center" disabled type="text" value="@aircraft.Reg.ToUpper()" />
+            </td>
+            <td style="border:none;text-align:end;">Date</td>
+            <td style="border:none;">
+                <input class="form-control" style="font-weight:600; font-size:11pt; width:100%;min-width:100%;text-align:center" disabled type="text" value="@Model.LearjetEntry.Date.ToString("yyyy-MM-dd")" />
+            </td>
+        </tr>
+        <tr>
+            <td style="border:none;"> Base of Operations</td>
+            <td style="border:none;">
+                <input class="form-control" style="font-weight:600;font-size:11pt; width:100%;min-width:100%;text-align:center" disabled type="text" value="@Model.LearjetEntry.BaseOfOperations" />
+            </td>
+            <td style="border:none;text-align:end;">Completed By</td>
+            <td style="border:none;">
+                <input class="form-control" style="font-weight:600;font-size:11pt;width:100%;min-width:100%;text-align:center" disabled type="text" value=" @Model.LearjetEntry.CompletedBy" />
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+<!--Exterior Table-->
+<table slot="table" class="table table-striped">
+    @{
+        var Exterior = ViewData["Exterior"] as Table<LearjetExteriorMaster>;
+    }
+    <thead class="thead-dark">
+        <tr>
+            <th class="h5" colspan="4">@Exterior.Header</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th class="h6">Status</th>
+            <th class="h6">Comments</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @functions {
+            public string getColor(string status)
+            {
+
+                switch (status.ToLower())
+                {
+                    case "unserviceable":
+                    case "onboard unserviceable":
+                    case "yes unserviceable":
+                        return "color:fff;background-color:#f44336;";
+
+                    case "expired":
+                        return "color:fff;background-color:#f44336;";
+                    case "not onboard":
+                        return "color:fff;background-color:#f44336;";
+                    case "bad condition":
+                        return "color:fff;background-color:#f44336;";
+                    case "onboard":
+                    case "acceptable":
+                    case "2x Servicable":
+                    case "1x Servicable":
+                    case "1x Orange Servicable":
+                    case "current":
+                    case "onboard serviceable":
+                    case "serviceable":
+                    case "yes serviceable":
+                    case "yes good condition":
+                    case "good condition":
+                        return "background-color:#89e36a;";
+                    default:
+                        return "";
+                }
+
+            }
+        }
+        @{
+            var itemNum = 1;
+            var i = 0;
+            if (Exterior != null)
+            {
+                foreach (var item in Model.Exteriors)
+                {
+                    <tr>
+                        <td class="rowName">
+                            @itemNum . @Exterior.Fields[i].Descr
+                        </td>
+                        @if (@item.Status == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="@getColor(@item.Status)">
+                                @item.Status
+                            </td>
+                        }
+                        @if (@item.Comments == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Comments
+                            </td>
+                        }
+                    </tr>
+                    itemNum++;
+                    i++;
+
+                }
+            }
+        }
+
+    </tbody>
+
+</table>
+<!--Interior Table-->
+<table slot="table" class="table table-striped">
+    @{
+        var InteriorQuestion = ViewData["Interior"] as Table<LearjetInteriorMaster>;
+    }
+    <thead class="thead-dark">
+        <tr>
+            <th class="h5" colspan="4">@InteriorQuestion.Header</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th class="h6">Status</th>
+            <th class="h6">Comments</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @{
+
+            if (InteriorQuestion != null)
+            {
+                itemNum = 1;
+                i = 0;
+                foreach (var item in Model.Interiors)
+                {
+                    <tr>
+                        <td class="rowName">
+                            @itemNum . @InteriorQuestion.Fields[i].Descr
+                        </td>
+                        @if (@item.Status == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="@getColor(@item.Status)">
+                                @item.Status
+                            </td>
+                        }
+
+                        @if (@item.Comments == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Comments
+                            </td>
+                        }
+
+                    </tr>
+                    itemNum++;
+                    i++;
+                }
+            }
+        }
+
+        <!-- Add ghost row which is used to append row in table -->
+    </tbody>
+
+</table>
+<footer></footer>
+<!--Cockpit-->
+<table slot="table" class="table table-striped">
+    @{
+        var Cockpit = ViewData["Cockpit"] as Table<LearjetCockpitMaster>;
+    }
+    <thead class="thead-dark">
+        <tr>
+            <th class="h5" colspan="5">@Cockpit.Header</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th class="h6">Expiry Date</th>
+            <th class="h6">Revision</th>
+            <th class="h6">Status</th>
+            <th class="h6">Comments</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @{
+            itemNum = 1;
+            i = 0;
+            if (Cockpit != null)
+            {
+                foreach (var item in Model.Cockpits)
+                {
+                    <tr>
+                        <td class="rowName">
+                            @itemNum . @Cockpit.Fields[i].Descr
+                        </td>
+                        @if (@item.ExpiryDate == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.ExpiryDate.Value.ToString("yyyy-MM-dd")
+                            </td>
+                        }
+                        @if (@item.RevisionText == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.RevisionText
+                            </td>
+                        }
+                        @if (@item.Status == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="@getColor(@item.Status)">
+                                @item.Status
+                            </td>
+                        }
+
+                        @if (@item.Comments == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Comments
+                            </td>
+                        }
+                    </tr>
+                    itemNum++;
+                    i++;
+                }
+
+            }
+            //preFlightAssesment
+        }
+
+    </tbody>
+
+</table>
+<!--Cabin-->
+<table slot="table" class="table  table-striped">
+    @{
+        var Cabin = ViewData["Cabin"] as Table<LearjetCabinMaster>;
+    }
+    <thead class="thead-dark">
+        <tr>
+            <th class="h5" colspan="5">@Cabin.Header</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th class="h6">Expiry Date</th>
+            <th class="h6">Revision</th>
+            <th class="h6">Status</th>
+            <th class="h6">Comments</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{
+            //preFlightAssesment
+            if (Cabin != null)
+            {
+
+                itemNum = 1;
+                i = 0;
+                foreach (var item in Model.Cabins)
+                {
+                    <tr>
+                        <td class="rowName">
+                            @itemNum . @Cabin.Fields[i].Descr
+                        </td>
+                        @if (@item.ExpiryDate == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.ExpiryDate.Value.ToString("yyyy-MM-dd")
+                            </td>
+                        }
+                        @if (@item.RevisionText == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.RevisionText
+                            </td>
+                        }
+                        @if (@item.QtyStatus == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="@getColor(@item.QtyStatus)">
+                                @item.QtyStatus
+                            </td>
+                        }
+                        @if (@item.Comments == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Comments
+                            </td>
+                        }
+                    </tr>
+                    itemNum++;
+                    i++;
+                }
+
+            }
+        }
+
+    </tbody>
+
+</table>
+<!--Flight Folders-->
+<table slot="table" class="table  table-striped">
+    @{
+        var FlightFolder = ViewData["FlightFolder"] as Table<LearjetFlightFolderMaster>;
+    }
+    <thead class="thead-dark">
+        <tr>
+            <th class="h5" colspan="4">@FlightFolder.Header</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th class="h6">Date (if appl.)</th>
+            <th class="h6">Status</th>
+            <th class="h6">Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            if (FlightFolder != null)
+            {
+                itemNum = 1;
+                i = 0;
+                foreach (var item in Model.FlightFolders)
+                {
+
+                    <tr>
+                        <td class="rowName">
+                            @itemNum . @FlightFolder.Fields[i].Descr
+                        </td>
+                        @if (@item.DateIfApplicable == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.DateIfApplicable.Value.ToString("yyyy-MM-dd")
+                            </td>
+                        }
+                        @if (@item.RevStatus == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="@getColor(@item.RevStatus)">
+                                @item.RevStatus
+                            </td>
+                        }
+                        @if (@item.Comments == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Comments
+                            </td>
+                        }
+                    </tr>
+                    itemNum++;
+                    i++;
+                }
+            }
+
+        }
+
+    </tbody>
+
+</table>
+
+<!--Manuals-->
+<table slot="table" class="table  table-striped">
+    @{
+        var Manuals = ViewData["Manuals"] as Table<LearjetManualsMaster>;
+    }
+    <thead class="thead-dark">
+        <tr>
+            <th class="h5" colspan="7">@Manuals.Header</th>
+        </tr>
+        <tr>
+            <th style="color:red"> (Please attach ITM List when mailing checklist)</th>
+            <th class="h6" rowspan="1" colspan="3">Manual Ref Number</th>
+            <th class="h6" rowspan="2" colspan="1">Rev Status</th>
+            <th class="h6" rowspan="2" colspan="1">Doc Format</th>
+            <th class="h6" rowspan="2" colspan="1">Comments</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th class="h6" rowspan="1" colspan="1">Pub No.</th>
+            <th class="h6" rowspan="1" colspan="1">Vol No.</th>
+            <th class="h6" rowspan="1" colspan="1">Set No.</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            if (Manuals != null)
+            {
+                itemNum = 1;
+                i = 0;
+                foreach (var item in Model.Manuals)
+                {
+                    <tr>
+                        <td class="rowName">
+                            @itemNum . @Manuals.Fields[i].Descr
+                        </td>
+
+                        @if (@item.PublicationNumber == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallCol">
+                                @item.PublicationNumber
+                            </td>
+                        }
+
+                        @if (@item.VolumeNumber == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallCol">
+                                @item.VolumeNumber
+                            </td>
+                        }
+                        @if (@item.SetNumber == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallCol">
+                                @item.SetNumber
+                            </td>
+                        }
+                        @if (@item.RevStatus == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallCol">
+                                @item.RevStatus
+                            </td>
+                        }
+                        @if (@item.DocumentFormat == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallCol">
+                                @item.DocumentFormat
+                            </td>
+                        }
+                        @if (@item.Comments == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Comments
+                            </td>
+                        }
+                    </tr>
+                    itemNum++;
+                    i++;
+                }
+            }
+        }
+    </tbody>
+    <tfoot>
+        <tr><td style="border:none;" colspan="7">NOTE: USE THE ITM AND IPAD AND CROSS REFERENCE REVISION, MANUAL NUMBER, LIST BELOW</td></tr>
+    </tfoot>
+</table>
+<!--IPAD Manuals-->
+
+<table slot="table" class="table  table-striped">
+    @{
+        var ManualsIPad = ViewData["ManualsEFB"] as Table<LearjetManualsEFBMaster>;
+
+    }
+    <thead class="thead-dark">
+        <tr>
+            <th class="h5" colspan="7">@ManualsIPad.Header</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th class="h6" rowspan="1" colspan="2">Manual Ref Number</th>
+            <th class="h6" rowspan="1" colspan="1">IPAD FO</th>
+            <th class="h6" rowspan="1" colspan="1">IPAD PIC</th>
+            <th class="h6" rowspan="2" colspan="1">Rev Status</th>
+            <th class="h6" rowspan="2" colspan="1">Comments</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th class="h6" rowspan="1" colspan="1">Pub No.</th>
+            <th class="h6" rowspan="1" colspan="1">Vol No.</th>
+            <th class="h6" rowspan="1" colspan="1">Set No.</th>
+            <th class="h6" rowspan="1" colspan="1">Set No.</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @{
+
+            if (ManualsIPad != null)
+            {
+
+                itemNum = 1;
+                i = 0;
+                foreach (var item in Model.ManualsEFB)
+                {
+                    <tr>
+                        <td class="rowName">
+                            @itemNum . @ManualsIPad.Fields[i].Descr
+                        </td>
+                        @if (@item.PublicationNumber == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallCol">
+                                @item.PublicationNumber
+                            </td>
+                        }
+                        @if (@item.VolumeNumber == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallCol">
+                                @item.VolumeNumber
+                            </td>
+                        }
+
+                        @if (@item.SetNumberFO == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallCol">
+                                @item.SetNumberFO
+                            </td>
+                        }
+                        @if (@item.SetNumberPIC == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallCol">
+                                @item.SetNumberPIC
+                            </td>
+                        }
+                        @if (@item.RevStatus == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="smallCol">
+                                @item.RevStatus
+                            </td>
+                        }
+                        @if (@item.Comments == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Comments
+                            </td>
+                        }
+                    </tr>
+                    itemNum++;
+                    i++;
+                }
+
+            }
+        }
+    </tbody>
+</table>
+
+<!-- OPS Docs Equipment -->
+<table slot="table" class="table  table-striped">
+    @{
+        var OpsDocs = ViewData["OpsDocs"] as Table<LearjetOperationDocumentsEquipmentMaster>;
+    }
+    <thead class="thead-dark">
+        <tr>
+            <th class="h5" colspan="7">@OpsDocs.Header</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th class="h6" rowspan="1">Date (if appl.)</th>
+            <th class="h6" rowspan="1">Rev Status / Form or Manual #</th>
+            <th class="h6" rowspan="1">Comments</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @{
+            if (OpsDocs != null)
+            {
+
+                itemNum = 1;
+                i = 0;
+                foreach (var item in Model.OperationDocuments)
+                {
+                    <tr>
+                        <td class="rowName">
+                            @itemNum . @OpsDocs.Fields[i].Descr
+                        </td>
+                        @if (@item.DateIfApplicable == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.DateIfApplicable.Value.ToString("yyyy-MM-dd")
+                            </td>
+                        }
+                        @if (@item.RevStatusQTY == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="@getColor(@item.RevStatusQTY)">
+                                @item.RevStatusQTY
+                            </td>
+                        }
+                        @if (@item.Comments == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Comments
+                            </td>
+                        }
+                    </tr>
+                    itemNum++;
+                    i++;
+                }
+            }
+        }
+    </tbody>
+</table>
+
+<!--Aircraft Flip File (1900D)-->
+<table slot="table" class="table table-striped">
+    @{
+        var AircraftFlipFile = ViewData["AircraftFlipFile"] as Table<B1900AircraftFlipFileMaster>;
+
+    }
+    <thead class="thead-dark">
+        <tr>
+            <th class="h5" colspan="7">@AircraftFlipFile.Header</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th class="h6" rowspan="1">Date (if appl.)</th>
+            <th class="h6" rowspan="1">Revision</th>
+            <th class="h6" rowspan="1">Status / QTY</th>
+            <th class="h6" rowspan="1">Comments</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @{
+            if (AircraftFlipFile != null)
+            {
+                itemNum = 1;
+                i = 0;
+                foreach (var item in Model.AircraftFlipFiles)
+                {
+
+                    <tr>
+                        <td class="rowName">
+                            @itemNum . @AircraftFlipFile.Fields[i].Descr
+                        </td>
+                        @if (@item.DateIfApplicable == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.DateIfApplicable.Value.ToString("yyyy-MM-dd")
+                            </td>
+                        }
+                        @if (@item.RevisionText == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.RevisionText
+                            </td>
+                        }
+                        @if (@item.RevStatusQTY == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="@getColor(@item.RevStatusQTY)">
+                                @item.RevStatusQTY
+                            </td>
+                        }
+                        @if (@item.Comments == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Comments
+                            </td>
+                        }
+                    </tr>
+                    itemNum++;
+                    i++;
+                }
+
+            }
+        }
+    </tbody>
+</table>
+
+<!--Equipment-->
+<table slot="table" class="table table-striped">
+    @{
+        var Equipment = ViewData["Equipment"] as Table<B1900EquipmentMaster>;
+    }
+    <thead clas="thead-dark">
+        <tr>
+            <th class="h5" colspan="7">@Equipment.Header</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th class="h6" rowspan="1">Date (if appl.)</th>
+            <th class="h6" rowspan="1">QTY</th>
+            <th class="h6" rowspan="1">Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @{
+            if (Equipment != null)
+            {
+
+                itemNum = 1;
+                i = 0;
+                foreach (var item in Model.Equipment)
+                {
+
+                    <tr>
+                        <td class="rowName">
+                            @itemNum . @Equipment.Fields[i].Descr
+                        </td>
+                        @if (@item.DateIfApplicable == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.DateIfApplicable.Value.ToString("yyyy-MM-dd")
+                            </td>
+                        }
+
+                        @if (@item.RevStatusQTY == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="@getColor(@item.RevStatusQTY)">
+                                @item.RevStatusQTY
+                            </td>
+                        }
+                        @if (@item.Comments == null)
+                        {
+                            <td class="emptyBlock">
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Comments
+                            </td>
+                        }
+                    </tr>
+                    itemNum++;
+                    i++;
+                }
+
+            }
+        }
+    </tbody>
+</table>
+
+<!--Additional Items-->
+@{
+    <table slot="table" class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th class="h5" colspan="7">Additional Items</th>
+            </tr>
+            <tr>
+                <th class="h6">Item</th>
+                <th class="h6" rowspan="1">Date (if appl.)</th>
+                <th class="h6" rowspan="1"> Rev Status / QTY</th>
+                <th class="h6" rowspan="1">Comments</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.AdditionalItems.Count == 0)
+            {
+                for (int ix = 0; ix < 5; ix++)
+                {
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+
+                }
+            }
+            @foreach (var item in Model.AdditionalItems)
+            {
+                <tr>
+                    @if (@item.ItemName == null)
+                    {
+                        <td class="emptyBlock">
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @item.ItemName
+                        </td>
+                    }
+                    @if (@item.DateIfApplicable == null)
+                    {
+                        <td class="emptyBlock">
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @item.DateIfApplicable.Value.ToString("yyyy-MM-dd")
+                        </td>
+                    }
+                    @if (@item.RevStatusQTY == null)
+                    {
+                        <td class="emptyBlock">
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="@getColor(@item.RevStatusQTY)">
+                            @item.RevStatusQTY
+                        </td>
+                    }
+                    @if (@item.Comments == null)
+                    {
+                        <td class="emptyBlock">
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @item.Comments
+                        </td>
+                    }
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+
+}
+
+<!--Disclaimer Table-->
+<div slot="footer" style="border:1px solid black;; display:flex; flex-direction:row;">
+    <div style="border:1px solid black;; display:flex">
+        I hereby certify that I have checked the aircraft and declare this document a true reflection of the status of the aircraft equipment and documentation.
+        I also acknowledge that the crew has read all documents on ASQS under the document Module
+    </div>
+    <div style="border:1px solid black; display:flex">
+        Signed By: @Model.LearjetEntry.CompletedBy
+    </div>
+</div>

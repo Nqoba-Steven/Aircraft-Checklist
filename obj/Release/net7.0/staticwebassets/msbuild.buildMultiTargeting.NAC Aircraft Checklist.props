@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\NAC Aircraft Checklist.props" />
+</Project>

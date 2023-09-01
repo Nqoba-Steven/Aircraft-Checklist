@@ -1,0 +1,1059 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using NAC_Aircraft_Checklist.Util.Table;
+@using NAC_Aircraft_Checklist.Models.Proof.B1900;
+@using NAC_Aircraft_Checklist.Models.Entities;
+@using NAC_Aircraft_Checklist.Models.Entry.Revisions;
+@using NAC_Aircraft_Checklist.Models.Tables;
+@using NAC_Aircraft_Checklist.Models.ProofRead.B1900;
+@model B1900ProofReadDocument;
+@{
+
+}
+<style>
+
+    :-webkit-input-placeholder {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    :-moz-placeholder {
+        /* Firefox 18- */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    ::-moz-placeholder {
+        /* Firefox 19+ */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    :-ms-input-placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    table {
+        width: 90%;
+        border-collapse: collapse;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    select {
+        word-wrap: normal;
+        text-align: center;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 4px;
+    }
+
+    td {
+        text-align: left;
+        font-size: 10pt;
+        font-weight: 700;
+        text-align: center''
+    }
+
+        td input[type="date"] {
+            display: block;
+            margin: 0 auto;
+        }
+
+    textarea {
+        width: 100%;
+        font-size: 11pt;
+        font-weight: 600;
+    }
+
+    .smallCol {
+        width: 84px;
+    }
+
+    textarea {
+        border: none;
+        resize: none;
+    }
+
+    select {
+        font-size: 11pt;
+        font-weight: 800;
+        min-width: 128px;
+        height: 32px;
+        text-align: center;
+    }
+
+        select option {
+            font-size: 11pt;
+            font-weight: 700;
+            text-align: center;
+        }
+
+    th {
+        text-align: center;
+    }
+
+    td {
+        position: relative;
+        text-align: center;
+    }
+
+
+
+    input[type=date] {
+        text-align: center;
+        width: 100%;
+        max-width: 128px;
+        font-size: 12pt;
+        font-weight: 600;
+    }
+
+    .rowName {
+        max-width: 49%;
+        width: 45%;
+        font-size: 12pt;
+        text-align: left;
+    }
+
+    .alertFocus:focus-visible {
+        outline-color: red;
+    }
+
+    .colspan-3 {
+        width: 100px;
+    }
+
+    .rowspan-2 {
+        height: 25px;
+    }
+
+    .documentDetails {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .documentDetailsRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .documentDetailsItem {
+        display: flex;
+        flex-direction: row;
+        width: 40%;
+        justify-content: space-between;
+    }
+
+    .emptyBlock {
+        background-color: #BDBDBD !important;
+    }
+
+    ::placeholder {
+        text-align: center;
+    }
+
+</style>
+@{
+    @functions {
+        public string isFlagged(bool flag, string? value)
+        {
+            if (!flag)
+            {
+                if(value!=null)
+                {
+                    string style = "background-color:#f44336";
+
+                    string str = $"style={style} title= '{value}'";
+                    return str;
+
+                }else{
+                    return "style='background-color:#f44336;'";
+                }
+                //Set tooltip expected value
+            }
+            else
+                return "";
+
+        }
+        public string isFlagged(bool flag, DateTime? expectedValue)
+        {
+            if (!flag)
+            {
+                if (expectedValue != null)
+                {
+                    string style = "background-color:#f44336";
+                    string formattedDate = expectedValue.Value.ToString("yyyy-MM-dd");
+                    string str = $"style={style} title= '{formattedDate}'";
+                    return str;
+                
+                }
+                else
+                    return "style='background-color:#f44336;'";
+                    
+
+                //Set tooltip expected value
+            }
+            else
+                return "";
+
+        }
+
+    }
+}
+
+@{
+    if (ViewData["Error"] != null)
+    {
+        <h1>Error</h1>
+        <h3>ViewData["Error"]</h3>
+    }
+
+    else
+
+    {
+        <h1>Here is your proof</h1>
+        var aircraft = ViewData["Aircraft"] as Aircraft;
+        var revision = ViewData["Revision"] as B1900Revision;
+        <nac-document-header src="/img/logo.png" document-number="OPS-035f" document-title="Aircraft Checklist - 1900D"></nac-document-header>
+        <table style="width:100%;">
+
+            <tbody>
+                <tr>
+                    <td style="border:none;">Aircraft registration</td>
+                    <td style="border:none;">
+                        <input class="form-control" disabled style="text-align:center;width:100%;" value="@aircraft.Reg" type="text" />
+                    </td>
+                    <td style="border:none;text-align:end;">Date</td>
+                    <td style="border:none;text-align:end;">
+                        <input class="form-control" style="width:100%;max-width:100%; margin:0;" class="form-control" disabled  value="@Model.b1900Entry.Date.ToString("yyyy-MM-dd")" type="date" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:none;"> Base of Operations</td>
+                    <td style="border:none;">
+                        <input class="form-control" disabled style="text-align:center;width:100%;" type="text" value="@Model.b1900Entry.BaseOfOperations" />
+                    </td>
+                    <td style="border:none;">Completed By</td>
+                    <td style="border:none;">
+                        <input class="form-control" style="text-align:center;width:100%;" disabled  type="text" value="@Model.b1900Entry.CompletedBy" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nac-table-pager revision="@revision.RevisionNumber" date="@revision.Date.ToString("yyyy-MM-dd")" validate="false">
+            <!--Cockpit-->
+            <table slot="table" class="table table-striped">
+                @{
+                    var Cockpit = ViewData["Cockpit"] as Table<B1900CockpitMaster>;
+                }
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="h3" colspan="5">@Cockpit.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th class="h4">Expiry Date</th>
+                        <th class="h4">Revision</th>
+                        <th class="h4">Status</th>
+                        <th class="h4">Comments</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @{
+                        var itemNum = 1;
+                        var i = 0;
+                        if (Cockpit != null)
+                        {
+                            foreach (var item in Model.Cockpits)
+                            {
+                                <tr>
+                                    <td class="rowName">
+                                        @itemNum . @Cockpit.Fields[i].Descr
+                                    </td>
+                                    @if (@item.ExpiryDate == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+
+                                        <td data-toggle="tooltip" data-placement="top" @isFlagged(item.ExpiryDateFlagged,Model.proofDocument.Cockpits[i].ExpiryDate)>
+                                            @item.ExpiryDate.Value.ToString("yyyy-MM-dd")
+                                        </td>
+                                    }
+                                    @if (@item.RevisionText == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.RevTextFlagged,Model.proofDocument.Cockpits[i].RevisionText)>
+                                            @item.RevisionText
+                                        </td>
+                                    }
+                                    @if (@item.Status == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td  @isFlagged(item.StatusFlagged,Model.proofDocument.Cockpits[i].Status)>
+                                            @item.Status
+                                        </td>
+                                    }
+                                    @if (@item.Comments == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @item.Comments
+                                        </td>
+                                    }
+
+                                </tr>
+                                itemNum++;
+                                i++;
+                            }
+
+                        }
+                        //preFlightAssesment
+                    }
+
+                </tbody>
+
+            </table>
+            <!--Cabin-->
+            <table slot="table" class="table table-striped">
+                @{
+                    var Cabin = ViewData["Cabin"] as Table<B1900CabinMaster>;
+                }
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="h3" colspan="5">@Cabin.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th class="h4">Expiry Date</th>
+                        <th class="h4">Revision</th>
+                        <th class="h4">Status</th>
+                        <th class="h4">Comments</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{
+                        //preFlightAssesment
+                        if (Cabin != null)
+                        {
+
+                            itemNum = 1;
+                            i = 0;
+                            foreach (var item in Model.Cabins)
+                            {
+                                <tr>
+                                    <td class="rowName">
+                                        @itemNum . @Cabin.Fields[i].Descr
+                                    </td>
+                                    @if (@item.ExpiryDate == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td  @isFlagged(item.ExpiryDateFlagged,Model.proofDocument.Cabins[i].ExpiryDate)>
+                                            @item.ExpiryDate.Value.ToString("yyyy-MM-dd")
+                                        </td>
+                                    }
+                                    @if (@item.RevisionText == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.RevTextFlagged,Model.proofDocument.Cabins[i].RevisionText)>
+                                            @item.RevisionText
+                                        </td>
+                                    }
+                                    @if (@item.Status == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.StatusFlagged,Model.proofDocument.Cabins[i].Status)>
+                                            @item.Status
+                                        </td>
+                                    }
+                                    @if (@item.Comments == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @item.Comments
+                                        </td>
+                                    }
+
+                                </tr>
+                                itemNum++;
+                                i++;
+                            }
+
+                        }
+                    }
+
+                </tbody>
+
+            </table>
+            <!--Flight Folders-->
+            <table slot="table" class="table table-striped">
+                @{
+                    var FlightFolder = ViewData["FlightFolder"] as Table<B1900FlightRedFolderMaster>;
+                }
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="h3" colspan="4">@FlightFolder.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th class="h4">Date (if appl.)</th>
+                        <th class="h4">Status</th>
+                        <th class="h4">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        if (FlightFolder != null)
+                        {
+                            itemNum = 1;
+                            i = 0;
+                            foreach (var item in Model.FlightFolder)
+                            {
+
+                                <tr>
+                                    <td class="rowName">
+                                        @itemNum . @FlightFolder.Fields[i].Descr
+                                    </td>
+                                    @if (@item.ExpiryDate == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.ExpiryDateFlagged,Model.proofDocument.FlightFolders[i].ExpiryDate)>
+                                            @item.ExpiryDate.Value.ToString("yyyy-MM-dd")
+                                        </td>
+                                    }
+                                    @if (@item.Status == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.RevStatusQTYFlagged,Model.proofDocument.FlightFolders[i].Status)>
+                                            @item.Status
+                                        </td>
+                                    }
+                                    @if (@item.Comments == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @item.Comments
+                                        </td>
+                                    }
+
+                                </tr>
+                                itemNum++;
+                                i++;
+                            }
+                        }
+
+                    }
+
+                </tbody>
+
+            </table>
+
+            <!--Manuals-->
+            <table slot="table" class="table table-striped">
+                @{
+                    var Manuals = ViewData["Manuals"] as Table<B1900ManualsMaster>;
+                }
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="h3" colspan="7">@Manuals.Header</th>
+                    </tr>
+                    <tr>
+                        <th style="color:red"> (Please attach ITM List when mailing checklist)</th>
+                        <th class="h5" rowspan="1" colspan="3">Manual Ref Number</th>
+                        <th class="h5" rowspan="2" colspan="1">Rev Status</th>
+                        <th class="h5" rowspan="2" colspan="1">Doc Format</th>
+                        <th class="h5" rowspan="2" colspan="1">Comments</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th class="h6" rowspan="1" colspan="1">Pub No.</th>
+                        <th class="h6" rowspan="1" colspan="1">Vol No.</th>
+                        <th class="h6" rowspan="1" colspan="1">Set No.</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        if (Manuals != null)
+                        {
+                            itemNum = 1;
+                            i = 0;
+                            foreach (var item in Model.Manuals)
+                            {
+                                <tr>
+                                    <td class="rowName">
+                                        @itemNum . @Manuals.Fields[i].Descr
+                                    </td>
+                                    @if (@item.PublicationNumber == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="smallCol"  @isFlagged(item.PublicationNumberFlagged,Model.proofDocument.Manuals[i].PublicationNumber)>
+                                            @item.PublicationNumber
+                                        </td>
+                                    }
+
+                                    @if (@item.VolumeNumber == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.VolumeNumberFlagged,Model.proofDocument.Manuals[i].VolumeNumber) class="smallCol">
+                                            @item.VolumeNumber
+                                        </td>
+                                    }
+                                    @if (@item.SetNumber == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.SetNumberFlagged,Model.proofDocument.Manuals[i].SetNumber) class="smallCol">
+                                            @item.SetNumber
+                                        </td>
+                                    }
+                                    @if (@item.RevStatus == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.RevStatusFlagged,Model.proofDocument.Manuals[i].RevStatus) class="smallCol">
+                                            @item.RevStatus
+                                        </td>
+                                    }
+                                    @if (@item.DocumentFormat == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.DocumentFormatFlagged,Model.proofDocument.Manuals[i].DocumentFormat) class="smallCol">
+                                            @item.DocumentFormat
+                                        </td>
+                                    }
+                                    @if (@item.Comments == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @item.Comments
+                                        </td>
+                                    }
+
+                                </tr>
+                                itemNum++;
+                                i++;
+                            }
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr><td style="border:none;" colspan="7">NOTE: USE THE ITM AND IPAD AND CROSS REFERENCE REVISION, MANUAL NUMBER, LIST BELOW</td></tr>
+                </tfoot>
+            </table>
+            <!--IPAD Manuals-->
+
+            <table slot="table" class="table table-striped">
+                @{
+                    var ManualsIPad = ViewData["ManualsIPad"] as Table<B1900ManualsIPadMaster>;
+
+                }
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="h3" colspan="7">@ManualsIPad.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th class="h5" rowspan="1" colspan="2">Manual Ref Number</th>
+                        <th class="h5" rowspan="1" colspan="1">IPAD FO</th>
+                        <th class="h5" rowspan="1" colspan="1">IPAD PIC</th>
+                        <th class="h5" rowspan="2" colspan="1">Rev Status</th>
+                        <th class="h5" rowspan="2" colspan="1">Comments</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th class="h6" rowspan="1" colspan="1">Pub No.</th>
+                        <th class="h6" rowspan="1" colspan="1">Vol No.</th>
+                        <th class="h6" rowspan="1" colspan="1">Set No.</th>
+                        <th class="h6" rowspan="1" colspan="1">Set No.</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @{
+
+                        if (ManualsIPad != null)
+                        {
+
+                            itemNum = 1;
+                            i = 0;
+                            foreach (var item in Model.ManualsIpad)
+                            {
+                                <tr>
+                                    <td class="rowName">
+                                        @itemNum . @ManualsIPad.Fields[i].Descr
+                                    </td>
+                                    @if (@item.PublicationNumber == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.PublicationNumberFlagged,Model.proofDocument.ManualsIPad[i].PublicationNumber) class="smallCol">
+                                            @item.PublicationNumber
+                                        </td>
+                                    }
+                                    @if (@item.VolumeNumber == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.VolumeNumberFlagged,Model.proofDocument.ManualsIPad[i].VolumeNumber) class="smallCol">
+                                            @item.VolumeNumber
+                                        </td>
+                                    }
+
+                                    @if (@item.SetNumberFO == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.SetNumberFOFlagged,Model.proofDocument.ManualsIPad[i].SetNumberFO) class="smallCol">
+                                            @item.SetNumberFO
+                                        </td>
+                                    }
+                                    @if (@item.SetNumberPIC == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.SetNumberPICFlagged,Model.proofDocument.ManualsIPad[i].SetNumberPIC) class="smallCol">
+                                            @item.SetNumberPIC
+                                        </td>
+                                    }
+                                    @if (@item.RevStatus == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.RevStatusFlagged,Model.proofDocument.ManualsIPad[i].RevStatus) class="smallCol">
+
+                                            @item.RevStatus
+                                        </td>
+                                    }
+                                    @if (@item.Comments == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @item.Comments
+                                        </td>
+                                    }
+
+                                </tr>
+                                itemNum++;
+                                i++;
+                            }
+
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <!-- OPS Docs Equipment -->
+            <table slot="table" class="table table-striped">
+                @{
+                    var OpsDocs = ViewData["OpsDocs"] as Table<B1900OpsDocsEquipmentMaster>;
+                }
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="h4" colspan="7">@OpsDocs.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th class="h5" rowspan="1">Date (if appl.)</th>
+                        <th class="h5" rowspan="1">Rev Status / Form or Manual #</th>
+                        <th class="h5" rowspan="1">Comments</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{
+                        if (OpsDocs != null)
+                        {
+                            itemNum = 1;
+                            i = 0;
+                            foreach (var item in Model.OperationDocuments)
+                            {
+
+                                <tr>
+                                    <td class="rowName">
+                                        @itemNum . @OpsDocs.Fields[i].Descr
+                                    </td>
+                                    @if (@item.DateIfApplicable == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.DateIfApplicableFlagged,Model.proofDocument.OperationDocuments[i].DateIfApplicable)>
+                                            @item.DateIfApplicable.Value.ToString("yyyy-MM-dd")
+                                        </td>
+                                    }
+                                    @if (@item.RevStatus == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.RevStatusFlagged,Model.proofDocument.OperationDocuments[i].RevStatus)>
+                                            @item.RevStatus
+                                        </td>
+                                    }
+                                    @if (@item.Comments == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @item.Comments
+                                        </td>
+                                    }
+
+                                </tr>
+                                itemNum++;
+                                i++;
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <!--Aircraft Flip File (1900D)-->
+            <table slot="table" class="table table-striped">
+                @{
+                    var AircraftFlipFile = ViewData["AircraftFlipFile"] as Table<B1900AircraftFlipFileMaster>;
+
+                }
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="h4" colspan="7">@AircraftFlipFile.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th class="h5" rowspan="1">Date (if appl.)</th>
+                        <th class="h5" rowspan="1">Revision</th>
+                        <th class="h5" rowspan="1">Status / QTY</th>
+                        <th class="h5" rowspan="1">Comments</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @{
+                        if (AircraftFlipFile != null)
+                        {
+                            itemNum = 1;
+                            i = 0;
+                            foreach (var item in Model.AircraftFlipFile)
+                            {
+
+                                <tr>
+                                    <td class="rowName">
+                                        @itemNum . @AircraftFlipFile.Fields[i].Descr
+                                    </td>
+                                    @if (@item.DateIfApplicable == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.DateIfApplicableFlagged,Model.proofDocument.AircraftFlipFiles[i].DateIfApplicable)>
+                                            @item.DateIfApplicable.Value.ToString("yyyy-MM-dd")
+                                        </td>
+                                    }
+                                    @if (@item.RevisionText == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.RevTextFlagged,Model.proofDocument.AircraftFlipFiles[i].RevisionText) >
+                                            @item.RevisionText
+                                        </td>
+                                    }
+                                    @if (@item.RevStatusQTY == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.RevStatusQTYFlagged,Model.proofDocument.AircraftFlipFiles[i].RevStatusQTY) >
+                                            @item.RevStatusQTY
+                                        </td>
+                                    }
+                                    @if (@item.Comments == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @item.Comments
+                                        </td>
+                                    }
+
+                                </tr>
+                                itemNum++;
+                                i++;
+                            }
+
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <!--Equipment-->
+            <table slot="table" class="table table-striped">
+                @{
+                    var Equipment = ViewData["Equipment"] as Table<B1900EquipmentMaster>;
+                }
+                <thead clas="thead-dark">
+                    <tr>
+                        <th class="h4" colspan="7">@Equipment.Header</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th class="h5" rowspan="1">Date (if appl.)</th>
+                        <th class="h5" rowspan="1">QTY</th>
+                        <th class="h5" rowspan="1">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    @{
+                        if (Equipment != null)
+                        {
+
+                            itemNum = 1;
+                            i = 0;
+                            foreach (var item in Model.Equipment)
+                            {
+
+                                <tr>
+                                    <td class="rowName">
+                                        @itemNum . @Equipment.Fields[i].Descr
+                                    </td>
+                                    @if (@item.DateIfApplicable == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.DateIfApplicableFlagged,Model.proofDocument.Equipment[i].DateIfApplicable)>
+                                            @item.DateIfApplicable.Value.ToString("yyyy-MM-dd")
+                                        </td>
+                                    }
+
+                                    @if (@item.RevStatusQTY == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td @isFlagged(item.RevStatusQTYFlagged,Model.proofDocument.Equipment[i].RevStatusQTY)>
+                                            @item.RevStatusQTY
+                                        </td>
+                                    }
+                                    @if (@item.Comments == null)
+                                    {
+                                        <td class="emptyBlock">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @item.Comments
+                                        </td>
+                                    }
+
+                                </tr>
+                                itemNum++;
+                                i++;
+                            }
+
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <!--Additional Items-->
+            if (Model.AdditionalItems != null && Model.AdditionalItems.Count > 0)
+            {
+            <table slot="table" class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="h4" colspan="7">Additional Items</th>
+                    </tr>
+                    <tr>
+                        <th class="h5">Item</th>
+                        <th class="h5" rowspan="1">Date (if appl.)</th>
+                        <th class="h5" rowspan="1"> Rev Status / QTY</th>
+                        <th class="h5" rowspan="1">Comments</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.AdditionalItems)
+                    {
+                        <tr>
+                            <td>
+                                @item.ItemName
+                            </td>
+                            <td>
+                                @item.DateIfApplicable.Value.ToString("yyyy-MM-dd")
+                            </td>
+                            <td >
+                                @item.RevStatusQTY
+                            </td>
+                            <td>
+                                @item.Comments
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            }
+            <!--Disclaimer Table-->
+            <table slot="footer" class="table">
+                <thead>
+                    <tr>
+                        <th style="border:none;" class="rowName"></th>
+                        <th style="border:none;"></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            I hereby certify that I have checked the aircraft and declare this document a true reflection of the status of the aircraft equipment and documentation.
+                            I also acknowledge that the crew has read all documents on ASQS under the document Module
+                        </td>
+                        <td>
+                            Signed
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border:none;"></td>
+                        <td style="border:none;"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0; width:100%;border:none;" colspan="3">
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+
+        </nac-table-pager>
+
+
+    }
+}

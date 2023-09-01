@@ -1,0 +1,67 @@
+html {
+  font-size: 14px;
+}
+@media print {
+    body {
+        width: 21cm;
+        height: 29.7cm;
+        margin: 30mm 45mm 30mm 45mm;
+        /* change the margins as you want them to be. */
+    }
+}
+
+div.chapter, div.appendix {
+    page-break-after: always;
+}
+
+div.titlepage {
+    page: blank;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+.smallCell {
+    width: 72px;
+}
+body {
+  margin-bottom: 60px;
+}
+@media only screen and (device-width: 768px), only screen and (max-width: 768px) {
+    /* CSS */
+    body {
+        width: 768px;
+        /* to centre page on screen*/
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1199px) {
+    body {
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    body {
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    body {
+    }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 479px) {
+    body {
+    }
+}

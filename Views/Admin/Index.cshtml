@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using NAC_Aircraft_Checklist.Models.Entry.Revisions;
+
+@{
+    List<LearjetRevision> learjetRevisions = ViewData["LearjetRevisions"] as List<LearjetRevision>;
+    List<B1900Revision> b1900Revisions = ViewData["B1900Revisions"] as List<B1900Revision>;
+}
+<script>
+    function openPage(target) {
+        window.location = target;
+    }
+</script>
+<h1>Revisions</h1>
+
+<div>
+    <h3>B1900</h3>
+    <h4>Current Revision</h4>
+    <h5>Older Revisions</h5>
+    <ul>
+        @{
+            foreach (B1900Revision rev in b1900Revisions)
+            {
+                <li>Revision Number: @rev.RevisionNumber   Date:@rev.Date </li>
+            }
+        }
+    </ul>
+    <button onclick="openPage('/Admin/CreateB1900Revision')">Create Revision</button>
+</div>
+
+<div>
+    <h3>Learjet</h3>
+    <h4>Current Revision</h4>
+    <h5>Older Revisions</h5>
+    <ul>
+        @{
+            foreach (LearjetRevision rev in learjetRevisions)
+            {
+                <li>Revision Number: @rev.RevisionNumber   Date:@rev.Date </li>
+            }
+        }
+    </ul>
+    <button onclick="openPage('/Admin/CreateLearjetRevision')">Create Revision</button>
+</div>

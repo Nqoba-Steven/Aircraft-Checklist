@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using NAC_Aircraft_Checklist.Models.Proof;
+@using NAC_Aircraft_Checklist.Models.Proof.Learjet;
+@using NAC_Aircraft_Checklist.Models.Entities;
+@{
+    var months = (LearjetProof[][])ViewData["LearjetProofs"];
+    var aircrafts = ViewData["Aircrafts"] as List<Aircraft>;
+}
+<script>
+    function openLink(target) {
+        window.location = target;
+    }
+
+</script>
+
+<h3>
+    Learjet
+    <small class="text-muted">Uploaded Proof Documents</small>
+</h3>
+@{
+    if (months.Length > 0 && months != null)
+
+    {
+        @foreach (var month in months)
+        {
+            <h3 style="margin-top:64px; border-top:2px solid black;">@month[0].Date.ToString("MMM yyyy")</h3>
+            <br />
+
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="h4">Aircraft</th>
+                        <th class="h4">Created By</th>
+                        <th class="h4">Date Created</th>
+                        <th class="h4">Revision</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (LearjetProof proof in month)
+                    {
+                        <tr onclick="openLink('/Proof/LearjetProofEdit?id=@proof.Id')">
+                            <td class="h5">@aircrafts.FirstOrDefault(a=>a.Id==proof.AircraftId).Reg</td>
+                            <td class="h5">@proof.User</td>
+                            <td class="h5">@proof.Date</td>
+                            <td class="h5">@proof.Revision</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+        }
+    }
+    else
+    {
+        <h2 class="h2">No Proofs Found</h2>
+    }
+}
+
